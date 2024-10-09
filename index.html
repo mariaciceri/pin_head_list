@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pin Head Lists</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1><img src="assets/images/pin-head-logo.png" alt="icon of a head with a grid over it"
+                class="h-8 w-auto mx-2"></i> Pin Head</h1>
+        <button id="my-lists">My Lists <i class="fa-solid fa-list-check"></i></button>
+    </header>
+
+    <main>
+        <aside>
+            <div>
+                <h1 class="">Create Your List</h1>
+                <button class="close-button">&times;</button>
+            </div>
+            <div>
+                <label for="name">List Name</label>
+                <input type="text" name="list-name" id="name">
+                <label for="category">Category</label>
+                <select name="category" id="category">
+                    <option value="food">Groceries</option>
+                    <option value="pets">Pet Shop</option>
+                    <option value="fashion">Fashion</option>
+                    <option value="pharmacy">Pharmacy</option>
+                    <option value="other" selected>Other</option>
+                </select>
+            </div>
+            <button type="submit">Create</button>
+        </aside>
+    </main>
+
+    <footer>
+        <button><a href="shopping-page.html" aria-label="Create a new list">New</a></button>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/b80d18dd16.js" crossorigin="anonymous"></script>
+    <script type="module" src="assets/javascript/main.js"></script>
+</body>
+
+</html>
