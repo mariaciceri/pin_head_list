@@ -16,15 +16,17 @@
     </header>
 
     <main>
-        <aside>
-            <div>
+        <aside class="create-list">
+            <div class="create-list-header">
                 <h1 class="">Create Your List</h1>
-                <button class="close-button">&times;</button>
+                <button class="close-button" id="close-button">&times;</button>
             </div>
-            <div>
+            <form class="list-form">
                 <label for="name">List Name</label>
+                <br>
                 <input type="text" name="list-name" id="name">
                 <label for="category">Category</label>
+                <br>
                 <select name="category" id="category">
                     <option value="food">Groceries</option>
                     <option value="pets">Pet Shop</option>
@@ -32,13 +34,15 @@
                     <option value="pharmacy">Pharmacy</option>
                     <option value="other" selected>Other</option>
                 </select>
-            </div>
+            </form>
             <button type="submit">Create</button>
         </aside>
     </main>
 
     <footer>
-        <button><a href="shopping-page.html" aria-label="Create a new list">New</a></button>
+        <button id="popup">
+            New
+        </button>
     </footer>
 
     <script src="https://kit.fontawesome.com/b80d18dd16.js" crossorigin="anonymous"></script>
