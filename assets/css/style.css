@@ -16,10 +16,11 @@ body {
     min-height: 100vh;
     position: relative;
     font-family: "Fira Sans Condensed", serif;
+    color: #01110A;
 }
 
 header {
-    background-color: #6B818C;
+    background-color: #d8ecd8;
     position: fixed;
     width: 100%;
     display: flex;
@@ -39,7 +40,7 @@ header img {
 header button {
     font-size: large;
     font-family: "Trirong", serif;
-    background-color: #6B818C;
+    background-color: #d8ecd8;
 }
 
 footer {
@@ -69,9 +70,9 @@ footer button {
     transform: translate(-50%, -50%);
     width: 200px;
     height: 300px;
-    background-color: #6B818C;
+    background-color: #d8ecd8;
     z-index: 11;
-    /* display: none; */
+    display: none;
 }
 
 .create-list-header {
@@ -86,28 +87,3 @@ footer button {
     padding: 30% 0;
 }
 
-/* style for popup window for creating new list */
-
-.create-item {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 300px;
-    background-color: #6B818C;
-    z-index: 10;
-    display: none;
-}
-
-.create-item-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em 1em;
-    font-size: small;
-}
-
-.item-form {
-    text-align: center;
-    padding: 20% 0;
-}

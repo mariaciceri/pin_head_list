@@ -46,34 +46,8 @@ function createNewList() {
     })
 };
 
-/**
- * Show popup window for creating a new item
- */
-//not working
-// function createNewItem() {
-//     const main = document.getElementById("main"); //click anywhere to open create item popup
-//     const closeCreateItem = document.getElementById("close-button-item");//close button
-//     const createItem = document.getElementById("create-item");//get the aside element that contains the create new item form;
-
-//     console.log(main)
-//     main.addEventListener("click", (event) => {
-//         const close = event.target === closeCreateItem;
-//         const createItemWindow = createItem.contains(event.target);
-
-//         //check if the click is not on the closing button or inside the popup
-//         if (!close && !createItemWindow) {
-//             createItem.style.display = "block"; // Show the popup
-//         }
-//     });
-
-//     closeCreateItem.addEventListener("click", () => {
-//         createItem.style.display = "none";
-//     });
-// }
-
 document.addEventListener("DOMContentLoaded", () => {   
     createNewList();
-    //createNewItem();
 });
 
 async function storeList(db, listName, category, date)
@@ -86,7 +60,7 @@ async function storeList(db, listName, category, date)
     
     try {
         await setDoc(listRef, listData);
-        console.log("list created sucessfully")
+        console.log("list created successfully")
     }
     catch(error) {
         console.log("something went wrong", error)
