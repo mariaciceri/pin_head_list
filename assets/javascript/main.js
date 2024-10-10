@@ -1,10 +1,24 @@
 
+
 document.addEventListener("DOMContentLoaded", () => {
     let main = document.getElementsByTagName("main")[0];
 
     main.addEventListener("click", () => {
 
     })
+})
+
+
+const newButton = document.getElementById("popup"); //New button
+const closeCreateList = document.getElementById("close-button");//close button
+const createNewList = document.getElementsByClassName("create-list")[0];
+
+newButton.addEventListener("click", () => {
+    createNewList.style.display = "block";
+})
+
+closeCreateList.addEventListener("click", () => {
+    createNewList.style.display = "none";
 })
 
 
