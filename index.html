@@ -22,13 +22,13 @@
                 <button class="close-button" id="close-button">&times;</button>
             </div>
             <form class="list-form">
-                <label for="name">List Name</label>
+                <label for="list-name">List Name</label>
                 <br>
-                <input type="text" name="list-name" id="name">
+                <input type="text" name="list-name" id="list-name" required>
                 <br>
                 <label for="category">Category</label>
                 <br>
-                <select name="category" id="category">
+                <select name="category" id="category" required>
                     <option value="food">Groceries</option>
                     <option value="pets">Pet Shop</option>
                     <option value="fashion">Fashion</option>
@@ -36,7 +36,7 @@
                     <option value="other" selected>Other</option>
                 </select>
             </form>
-            <button type="submit">Create</button>
+            <button type="submit" id="submit-list">Create</button>
         </aside>
 
         <aside class="create-item" id="create-item">
@@ -45,9 +45,9 @@
                 <button class="close-button" id="close-button-item">&times;</button>
             </div>
             <form class="item-form">
-                <label for="name">Item Name</label>
+                <label for="item-name">Item Name</label>
                 <br>
-                <input type="text" name="item-name" id="name">
+                <input type="text" name="item-name" id="item-name">
                 <br>
                 <label for="price">Price</label>
                 <br>

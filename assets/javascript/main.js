@@ -1,7 +1,6 @@
 // Import the functions from the SDKs 
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { setDoc, doc, getDoc, getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+import { setDoc, doc, getDoc, getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
 
 
 // Your web app's Firebase configuration
@@ -18,7 +17,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const analytics = getAnalytics(app);
+
+
 
 /**
  * Show popup window for creating a new list
@@ -27,14 +27,22 @@ function createNewList() {
     const newButton = document.getElementById("popup"); //New button
     const closeCreateList = document.getElementById("close-button");//close button
     const createList = document.getElementById("create-list"); //get the aside element that contains the create new list form;
-
+    const submitButton = document.getElementById("submit-list"); //gett the submit button
 
     newButton.addEventListener("click", () => {
         createList.style.display = "block";
-    })
+    });
 
     closeCreateList.addEventListener("click", () => {
         createList.style.display = "none";
+    });
+
+    submitButton.addEventListener("click", () => {
+        const listName = document.getElementById("list-name").value;
+        const category = document.getElementById("category").value;
+        const date = new Date().toISOString();
+
+        storeList(db, listName, category, date);
     })
 };
 
@@ -66,7 +74,28 @@ function createNewList() {
 document.addEventListener("DOMContentLoaded", () => {   
     createNewList();
     //createNewItem();
-})
+});
+
+async function storeList(db, listName, category, date)
+{
+    const listData = {
+        category: category,
+        date: date
+    };
+    const listRef = doc(db, "lists", listName)
+    
+    try {
+        await setDoc(listRef, listData);
+        console.log("list created sucessfully")
+    }
+    catch(error) {
+        console.log("something went wrong", error)
+    }  
+};
+
+
+
+
 
 
 
