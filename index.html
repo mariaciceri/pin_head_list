@@ -15,8 +15,8 @@
         <button id="my-lists">My Lists <i class="fa-solid fa-list-check"></i></button>
     </header>
 
-    <main>
-        <aside class="create-list">
+    <main id="main">
+        <aside class="create-list" id="create-list">
             <div class="create-list-header">
                 <h1 class="">Create Your List</h1>
                 <button class="close-button" id="close-button">&times;</button>
@@ -25,6 +25,7 @@
                 <label for="name">List Name</label>
                 <br>
                 <input type="text" name="list-name" id="name">
+                <br>
                 <label for="category">Category</label>
                 <br>
                 <select name="category" id="category">
@@ -36,6 +37,28 @@
                 </select>
             </form>
             <button type="submit">Create</button>
+        </aside>
+
+        <aside class="create-item" id="create-item">
+            <div class="create-item-header">
+                <h1 class="">Create Your Item</h1>
+                <button class="close-button" id="close-button-item">&times;</button>
+            </div>
+            <form class="item-form">
+                <label for="name">Item Name</label>
+                <br>
+                <input type="text" name="item-name" id="name">
+                <br>
+                <label for="price">Price</label>
+                <br>
+                <input type="number" name="price" id="price">
+                <br>
+                <label for="place">Where to Buy</label>
+                <br>
+                <input type="text" name="place" id="place">
+            </form>
+            <button type="submit">Create</button>
+
         </aside>
     </main>
 
