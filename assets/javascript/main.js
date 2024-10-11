@@ -1,6 +1,7 @@
 // Import the functions from the SDKs 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
 import { setDoc, doc, getDoc, getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+import { Item } from "./itemClass";
 
 
 // Your web app's Firebase configuration
@@ -54,9 +55,13 @@ function createNewList() {
     });
 };
 
+/**
+ * Creates new item with unique ID and insert them in the HTML. Add event listener to delete button.
+ */
 function createItem() {
     const addItem = document.getElementById("add-item");
     let itemId = 1;
+    const arrayOfItems = [];
 
     addItem.addEventListener("click", () => {
         const itemName = document.getElementById("item-name").value;
@@ -64,7 +69,6 @@ function createItem() {
         const itemPlace = document.getElementById("item-place").value;
         const listOfItems = document.getElementById("display-items");
         
-
         listOfItems.innerHTML += `<div class="list-items" id="${itemId}">
             <div>${itemName}</div>
             <div class="item-price">${itemPrice}</div>
@@ -72,11 +76,17 @@ function createItem() {
             <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
         </div>
     `
+        let newItem = new Item(itemName,itemPrice,itemPlace);
+        arrayOfItems.push({[itemId]:newItem})
+
         itemId += 1;
-        deleteItem(); //adicionando so no primeiro item
+        deleteItem();
     });
 }
 
+/**
+ * Delete item from the HTML
+ */
 function deleteItem() {
     let deleteButtons = document.getElementsByClassName("delete-item");
 
@@ -93,6 +103,12 @@ document.addEventListener("DOMContentLoaded", () => {
     createItem();
 });
 
+/**
+ * Save the new created list to Firebase.
+ * @param {str} listName  
+ * @param {str} category 
+ * @param {object} date 
+ */
 async function storeList(db, listName, category, date)
 {
     const listData = {
