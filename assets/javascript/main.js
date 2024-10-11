@@ -1,7 +1,7 @@
 // Import the functions from the SDKs 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
 import { setDoc, doc, getDoc, getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
-import { Item } from "./itemClass";
+import { Item } from "./itemClass.js";
 
 
 // Your web app's Firebase configuration
@@ -61,7 +61,7 @@ function createNewList() {
 function createItem() {
     const addItem = document.getElementById("add-item");
     let itemId = 1;
-    const arrayOfItems = [];
+    const objectOfItems = {};
 
     addItem.addEventListener("click", () => {
         const itemName = document.getElementById("item-name").value;
@@ -77,7 +77,7 @@ function createItem() {
         </div>
     `
         let newItem = new Item(itemName,itemPrice,itemPlace);
-        arrayOfItems.push({[itemId]:newItem})
+        objectOfItems[itemId] = newItem;
 
         itemId += 1;
         deleteItem();
