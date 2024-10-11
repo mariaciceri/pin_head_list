@@ -108,7 +108,7 @@ footer button {
 .list-items {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 0.3fr;
-    padding: 1em;
+    padding: 0.2em;
     width: 100%;
 }
 

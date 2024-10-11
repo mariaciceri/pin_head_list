@@ -56,19 +56,39 @@ function createNewList() {
 
 function createItem() {
     const addItem = document.getElementById("add-item");
+    let itemId = 1;
 
     addItem.addEventListener("click", () => {
         const itemName = document.getElementById("item-name").value;
         const itemPrice = document.getElementById("item-price").value;
         const itemPlace = document.getElementById("item-place").value;
-        const listOfItems = document.getElementById("list-items");
+        const listOfItems = document.getElementById("display-items");
+        
 
-        listOfItems.innerHTML += `<div>${itemName}</div>
-        <div class="item-price">${itemPrice}</div>
-        <div class="item-price">${itemPlace}</div>
-        <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
-        `
+        listOfItems.innerHTML += `<div class="list-items" id="${itemId}">
+            <div>${itemName}</div>
+            <div class="item-price">${itemPrice}</div>
+            <div class="item-price">${itemPlace}</div>
+            <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
+        </div>
+    `
+        itemId += 1;
+        deleteItem(); //adicionando so no primeiro item
     });
+}
+
+function deleteItem() {
+    // let deleteButtons = document.getElementsByClassName("delete-item");
+    const button = document.getElementsByClassName("delete-item")[0];
+    console.log(button)
+
+    // for(let button of deleteButtons) {
+        button.addEventListener("click", () => {
+            let item = this.getAttribute("id"); //not working
+            let deletedItem = document.getElementById(item);
+            deletedItem.innerHTML = ``;
+        });
+    //}
 }
 
 document.addEventListener("DOMContentLoaded", () => {   
