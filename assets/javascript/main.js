@@ -24,10 +24,10 @@ const db = getFirestore(app);
  * Show popup window for creating a new list
  */
 function createNewList() {
-    const newButton = document.getElementById("popup"); //New button
+    const newButton = document.getElementById("popup"); //New (list) button
     const closeCreateList = document.getElementById("close-button");//close button
     const createList = document.getElementById("create-list"); //get the aside element that contains the create new list form;
-    const submitButton = document.getElementById("submit-list"); //gett the submit button
+    const submitButton = document.getElementById("submit-list"); //get the submit button
 
     newButton.addEventListener("click", () => {
         createList.style.display = "block";
@@ -39,24 +39,41 @@ function createNewList() {
 
     // when submit button is clicked: submit list to Firebase, hides the popup,
     // and show the create item form.
-    submitButton.addEventListener("click", () => {
+    submitButton.addEventListener("click", (event) => {
+
         const listName = document.getElementById("list-name").value;
         const category = document.getElementById("category").value;
         const date = new Date().toISOString();
         const list = document.getElementById("list");
         const listTitle = document.getElementById("list-title");
         
-
         storeList(db, listName, category, date);
         createList.style.display = "none";
         listTitle.innerHTML = listName;
         list.style.display = "block";
     });
-
 };
+
+function createItem() {
+    const addItem = document.getElementById("add-item");
+
+    addItem.addEventListener("click", () => {
+        const itemName = document.getElementById("item-name").value;
+        const itemPrice = document.getElementById("item-price").value;
+        const itemPlace = document.getElementById("item-place").value;
+        const listOfItems = document.getElementById("list-items");
+
+        listOfItems.innerHTML += `<div>${itemName}</div>
+        <div class="item-price">${itemPrice}</div>
+        <div class="item-price">${itemPlace}</div>
+        <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
+        `
+    });
+}
 
 document.addEventListener("DOMContentLoaded", () => {   
     createNewList();
+    createItem();
 });
 
 async function storeList(db, listName, category, date)
