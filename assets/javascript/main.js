@@ -78,17 +78,14 @@ function createItem() {
 }
 
 function deleteItem() {
-    // let deleteButtons = document.getElementsByClassName("delete-item");
-    const button = document.getElementsByClassName("delete-item")[0];
-    console.log(button)
+    let deleteButtons = document.getElementsByClassName("delete-item");
 
-    // for(let button of deleteButtons) {
-        button.addEventListener("click", () => {
-            let item = this.getAttribute("id"); //not working
-            let deletedItem = document.getElementById(item);
-            deletedItem.innerHTML = ``;
+    for(let button of deleteButtons) {
+        button.addEventListener("click", (event) => {
+            let itemDiv = event.target.closest(".list-items");
+            itemDiv.remove();
         });
-    //}
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {   
