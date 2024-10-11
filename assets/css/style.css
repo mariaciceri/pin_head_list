@@ -23,6 +23,7 @@ header {
     background-color: #d8ecd8;
     position: fixed;
     width: 100%;
+    height: auto;
     display: flex;
     font-family: "Trirong", serif;
     font-size: small;
@@ -44,7 +45,7 @@ header button {
 }
 
 main {
-    margin: 6rem 0;
+    margin: 5rem 0;
 }
 
 footer {
@@ -118,6 +119,13 @@ footer button {
 /* the whole list container */
 .list {
     display: none;
+    height: fit-content;
+}
+
+/* save list button */
+.save-list {
+    position: fixed;
+    right: 0;
 }
 
 
