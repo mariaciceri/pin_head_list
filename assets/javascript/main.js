@@ -37,13 +37,22 @@ function createNewList() {
         createList.style.display = "none";
     });
 
+    // when submit button is clicked: submit list to Firebase, hides the popup,
+    // and show the create item form.
     submitButton.addEventListener("click", () => {
         const listName = document.getElementById("list-name").value;
         const category = document.getElementById("category").value;
         const date = new Date().toISOString();
+        const list = document.getElementById("list");
+        const listTitle = document.getElementById("list-title");
+        
 
         storeList(db, listName, category, date);
-    })
+        createList.style.display = "none";
+        listTitle.innerHTML = listName;
+        list.style.display = "block";
+    });
+
 };
 
 document.addEventListener("DOMContentLoaded", () => {   
