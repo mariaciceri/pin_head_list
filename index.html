@@ -38,17 +38,22 @@
             </form>
             <button type="submit" id="submit-list">Create</button>
         </aside>
-        <aside class="list">
-            <div class="list-items" id="list-items">
+        <aside class="list" id="list">
+            <h1 id="list-title"></h1>
+            <div class="list-items">
                 <div class="item-name">ujko </div>
                 <div class="item-price">20kr</div>
                 <div class="place">Lceh</div>
                 <div class="item-name">mango</div>
                 <div class="item-price">20kr</div>
+                <div class="place"></div>
+                <div class="item-name">mango</div>
+                <div class="item-price">20kr</div>
                 <div class="place">Lidl</div>
                 <div class="item-name">mango</div>
                 <div class="item-price">20kr</div>
                 <div class="place">Lidl</div>
+                
             </div>
             <div>
                 <form id="add-items" class="add-items">
@@ -56,6 +61,7 @@
                     <input type="number" name="price" id="price" placeholder="Item Price">
                     <input type="text" name="place" id="place" placeholder="Where to buy">
                 </form>
+                <button type="submit" id="save-list" class="save-list">Save</button>
             </div>
         </aside>
     </main>
