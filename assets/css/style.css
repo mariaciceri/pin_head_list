@@ -9,7 +9,7 @@
 }
 
 body {
-    background-color: #EEF0F2;
+    background-color: #e9ede9;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -41,6 +41,10 @@ header button {
     font-size: large;
     font-family: "Trirong", serif;
     background-color: #d8ecd8;
+}
+
+main {
+    margin: 6rem 0;
 }
 
 footer {
@@ -86,4 +90,34 @@ footer button {
     text-align: center;
     padding: 30% 0;
 }
+
+/* item insertion form */
+
+.add-items {
+    padding: 1em;
+}
+
+.add-items input {
+    width: 32%;
+    padding: 0.2em;
+}
+
+/* items display */
+
+.list-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 1em;
+    width: 95%;
+}
+
+.item-price, .place {
+    text-align: center;
+}
+
+/* the whole list container */
+.list {
+    display: none;
+}
+
 
