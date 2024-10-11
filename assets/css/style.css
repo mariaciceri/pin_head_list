@@ -107,9 +107,9 @@ footer button {
 
 .list-items {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 0.3fr;
     padding: 1em;
-    width: 95%;
+    width: 100%;
 }
 
 .item-price, .place {
@@ -126,6 +126,11 @@ footer button {
 .save-list {
     position: fixed;
     right: 0;
+}
+
+/* delete item button */
+.delete-item {
+    text-align: end;
 }
 
 
