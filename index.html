@@ -40,26 +40,14 @@
         </aside>
         <aside class="list" id="list">
             <h1 id="list-title"></h1>
-            <div class="list-items">
-                <div class="item-name">ujko </div>
-                <div class="item-price">20kr</div>
-                <div class="place">Lceh</div>
-                <div class="item-name">mango</div>
-                <div class="item-price">20kr</div>
-                <div class="place"></div>
-                <div class="item-name">mango</div>
-                <div class="item-price">20kr</div>
-                <div class="place">Lidl</div>
-                <div class="item-name">mango</div>
-                <div class="item-price">20kr</div>
-                <div class="place">Lidl</div>
-                
+            <div class="list-items" id="list-items">
             </div>
             <div>
                 <form id="add-items" class="add-items">
-                    <input type="text" name="name" id="name" placeholder="Item Name">
-                    <input type="number" name="price" id="price" placeholder="Item Price">
-                    <input type="text" name="place" id="place" placeholder="Where to buy">
+                    <input type="text" name="name" id="item-name" placeholder="Item Name">
+                    <input type="number" name="price" id="item-price" placeholder="Item Price">
+                    <input type="text" name="place" id="item-place" placeholder="Where to buy">
+                    <button type="reset" id="add-item">Add</button>
                 </form>
                 <button type="submit" id="save-list" class="save-list">Save</button>
             </div>
