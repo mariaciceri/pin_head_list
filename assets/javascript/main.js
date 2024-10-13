@@ -1,28 +1,13 @@
 // Import the functions from the SDKs 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-import { setDoc, doc, getDoc, getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
-import { Item } from "./itemClass.js";
-
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyAPvm9RW7ABgg2u8ZX4FjQFN5moWOHoxbg",
-    authDomain: "pin-8e7c8.firebaseapp.com",
-    projectId: "pin-8e7c8",
-    storageBucket: "pin-8e7c8.appspot.com",
-    messagingSenderId: "463561637941",
-    appId: "1:463561637941:web:5d71e7900e1b80b517b17c",
-    measurementId: "G-7BFSEETLVC"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
+import { db, getDoc, getDocs, setDoc, doc, collection } from "./firebase_config.js";
+import { MyItem } from "./my_item.js";
 
 
 /**
- * Show popup window for creating a new list
+ * Show popup window for creating a new list;
+ * Close button;
+ * Submit button that will create and store list on the server, hide the list creation popup
+ * and show the create items form;
  */
 function createNewList() {
     const newButton = document.getElementById("popup"); //New (list) button
@@ -76,7 +61,7 @@ function createItem() {
             <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
         </div>
     `
-        let newItem = new Item(itemName,itemPrice,itemPlace);
+        let newItem = new MyItem(itemName,itemPrice,itemPlace);
         objectOfItems[itemId] = newItem;
 
         itemId += 1;

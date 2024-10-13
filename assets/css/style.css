@@ -90,7 +90,7 @@ footer button {
     border-radius: 20px;
     border-style: double;
     border-color: #EDDDDD;
-    /* display: none; */
+    display: none;
 }
 
 .create-list-header {
