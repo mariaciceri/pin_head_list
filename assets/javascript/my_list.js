@@ -1,24 +1,32 @@
-//manage items on the list: display, delete, add;
+//manage items on the list:  delete
 
-import { MyItem } from "./my_item";
+import { MyItem } from "./my_item.js";
 
 export class MyList {
     constructor() {
         this.storedItems = {};
-        this.currentId = 0;
     }
 
-    async _addItemsList () {
+    async _addItemsList() {
+        //it is being called when the button is clicked
+        console.log(this.storedItems);
+    }
+
+    async _deleteItem() {
 
     }
 
-    onAddButtonClicked () {
+    onAddButtonClicked(itemName, itemPrice, itemPlace, id) {
         const newItem = new MyItem(itemName, itemPrice, itemPlace);
-        this.storedItems[this.currentId] = newItem; 
-        this.currentId++;
+        this.storedItems[id] = newItem; 
     }
 
     onSaveButtonClicked () {
         this._addItemsList();
     }
+
+    deleteItemFromStoredItems(itemId) {
+        delete this.storedItems[itemId];
+    }
+       
 }

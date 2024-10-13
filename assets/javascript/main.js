@@ -45,8 +45,10 @@ function setupCreateListButtons(listManager) {
 /**
  * Creates new item with unique ID and insert them in the HTML. Add event listener to delete button.
  */
-function setupAddItemButton() {
+function setupAddButtons() {
     const addItem = document.getElementById("add-item");
+    const newList = new MyList();
+    let id = 0;
 
     addItem.addEventListener("click", () => {
         const itemName = document.getElementById("item-name").value;
@@ -54,28 +56,43 @@ function setupAddItemButton() {
         const itemPlace = document.getElementById("item-place").value;
         const listOfItems = document.getElementById("display-items");
         
-        listOfItems.innerHTML += `<div class="list-items">
+        listOfItems.innerHTML += `<div class="list-items" id=${id}>
             <div>${itemName}</div>
             <div class="item-price">${itemPrice}</div>
             <div class="item-price">${itemPlace}</div>
             <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
         </div>
     `
-
-        deleteItem();
+        newList.onAddButtonClicked(itemName, itemPrice, itemPlace, id);
+        setupDeleteItemButton(newList);
+        id++;
     });
+
+    setupSaveButton(newList);
+}
+
+/**
+ * Save list button
+ */
+function setupSaveButton(newList) {
+    const saveListButton = document.getElementById("save-list");
+    saveListButton.addEventListener("click", () => {
+        newList.onSaveButtonClicked();
+    })
 }
 
 /**
  * Delete item from the HTML
  */
-function deleteItem() {
+function setupDeleteItemButton(newList) {
     let deleteButtons = document.getElementsByClassName("delete-item");
 
     for(let button of deleteButtons) {
         button.addEventListener("click", (event) => {
-            let itemDiv = event.target.closest(".list-items");
+            const itemDiv = event.target.closest(".list-items");
+            const itemId = itemDiv.id;
             itemDiv.remove();
+            newList.deleteItemFromStoredItems(itemId);
         });
     }
 }
@@ -84,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let listManager = new ListManager();
     
     setupCreateListButtons(listManager);
-    createItem();
+    setupAddButtons();
 });
 
 
