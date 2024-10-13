@@ -1,6 +1,8 @@
 // Import the functions from the SDKs 
-import { db, getDoc, getDocs, setDoc, doc, collection } from "./firebase_config.js";
+import { db } from "./firebase_config.js";
 import { MyItem } from "./my_item.js";
+import { MyList } from "./my_list.js";
+import { ListManager } from "./my_list_manager.js";
 
 
 /**
@@ -9,7 +11,7 @@ import { MyItem } from "./my_item.js";
  * Submit button that will create and store list on the server, hide the list creation popup
  * and show the create items form;
  */
-function createNewList() {
+function setupCreateListButtons(listManager) {
     const newButton = document.getElementById("popup"); //New (list) button
     const closeCreateList = document.getElementById("close-button");//close button
     const createList = document.getElementById("create-list"); //get the aside element that contains the create new list form;
@@ -32,8 +34,8 @@ function createNewList() {
         const date = new Date().toISOString();
         const list = document.getElementById("list");
         const listTitle = document.getElementById("list-title");
-        
-        storeList(db, listName, category, date);
+
+        listManager.onCreateListButtonClicked(db, listName, category, date);
         createList.style.display = "none";
         listTitle.innerHTML = listName;
         list.style.display = "block";
@@ -43,10 +45,8 @@ function createNewList() {
 /**
  * Creates new item with unique ID and insert them in the HTML. Add event listener to delete button.
  */
-function createItem() {
+function setupAddItemButton() {
     const addItem = document.getElementById("add-item");
-    let itemId = 1;
-    const objectOfItems = {};
 
     addItem.addEventListener("click", () => {
         const itemName = document.getElementById("item-name").value;
@@ -54,17 +54,14 @@ function createItem() {
         const itemPlace = document.getElementById("item-place").value;
         const listOfItems = document.getElementById("display-items");
         
-        listOfItems.innerHTML += `<div class="list-items" id="${itemId}">
+        listOfItems.innerHTML += `<div class="list-items">
             <div>${itemName}</div>
             <div class="item-price">${itemPrice}</div>
             <div class="item-price">${itemPlace}</div>
             <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
         </div>
     `
-        let newItem = new MyItem(itemName,itemPrice,itemPlace);
-        objectOfItems[itemId] = newItem;
 
-        itemId += 1;
         deleteItem();
     });
 }
@@ -84,50 +81,14 @@ function deleteItem() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {   
-    createNewList();
+    let listManager = new ListManager();
+    
+    setupCreateListButtons(listManager);
     createItem();
 });
 
-/**
- * Save the new created list to Firebase.
- * @param {str} listName  
- * @param {str} category 
- * @param {object} date 
- */
-async function storeList(db, listName, category, date)
-{
-    const listData = {
-        category: category,
-        date: date
-    };
-    const listRef = doc(db, "lists", listName)
-    
-    try {
-        await setDoc(listRef, listData);
-        console.log("list created successfully")
-    }
-    catch(error) {
-        console.log("something went wrong", error)
-    }  
-};
 
 
 
 
-
-
-
-
-
-//display the stored lists
-//  - list name; icon for the category (?)
-
-//when a list is opened:
-//  - name on top with icon
-//  - product name, price, where to buy;
-
-
-//after creating the list:
-//  - click on the body to add a new item: name; price; where to buy;
-//  - show item on the screen with a checkbox; (gradient effect, fade away)
 
