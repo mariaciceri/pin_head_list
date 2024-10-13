@@ -1,6 +1,5 @@
 // Import the functions from the SDKs 
-import { db } from "./firebase_config.js";
-import { MyItem } from "./my_item.js";
+
 import { MyList } from "./my_list.js";
 import { ListManager } from "./my_list_manager.js";
 
@@ -11,7 +10,7 @@ import { ListManager } from "./my_list_manager.js";
  * Submit button that will create and store list on the server, hide the list creation popup
  * and show the create items form;
  */
-function setupCreateListButtons(listManager) {
+function setupCreateListButtons() {
     const newButton = document.getElementById("popup"); //New (list) button
     const closeCreateList = document.getElementById("close-button");//close button
     const createList = document.getElementById("create-list"); //get the aside element that contains the create new list form;
@@ -35,7 +34,6 @@ function setupCreateListButtons(listManager) {
         const list = document.getElementById("list");
         const listTitle = document.getElementById("list-title");
 
-        listManager.onCreateListButtonClicked(db, listName, category, date);
         createList.style.display = "none";
         listTitle.innerHTML = listName;
         list.style.display = "block";
@@ -75,9 +73,10 @@ function setupAddButtons() {
  * Save list button
  */
 function setupSaveButton(newList) {
+    const listName = document.getElementById("list-title").innerText
     const saveListButton = document.getElementById("save-list");
     saveListButton.addEventListener("click", () => {
-        newList.onSaveButtonClicked();
+        newList.onSaveButtonClicked(listName);
     })
 }
 
@@ -98,9 +97,8 @@ function setupDeleteItemButton(newList) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {   
-    let listManager = new ListManager();
     
-    setupCreateListButtons(listManager);
+    setupCreateListButtons();
     setupAddButtons();
 });
 
