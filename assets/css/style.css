@@ -196,6 +196,7 @@ footer button {
     background-color: rgba(1, 17, 10, 0.8);
     color: #EDDEDE;
     padding: 10px;
+    cursor: pointer;
 }
 
 
