@@ -137,8 +137,7 @@ footer button {
     width: 100px;
     height: 26px;
     position: relative;
-    left: 50px;
-    top: 20px;
+    margin-top: 35px;
 }
 
 /* item insertion form */
