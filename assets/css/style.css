@@ -180,3 +180,23 @@ footer button {
 .delete-item {
     text-align: end;
 }
+
+/* dropdown menu for created lists */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 10px;
+    font-size: medium;
+    z-index: 2;
+    background-color: rgba(1, 17, 10, 0.8);
+    color: #EDDEDE;
+    padding: 10px;
+}
+
+
+
