@@ -81,7 +81,13 @@ function setupSaveButton(newList) {
     const saveListButton = document.getElementById("save-list");
     saveListButton.addEventListener("click", () => {
         newList.onSaveButtonClicked(listName);
-    })
+        
+        const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
+        dropdownMenu.innerHTML = `<div id="${listName}">
+        ${listName}
+        </div>
+        `
+    });
 }
 
 /**
