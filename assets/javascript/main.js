@@ -4,14 +4,14 @@ import { MyList } from "./my_list.js";
 /**
  * Show popup window for creating a new list;
  * Close button;
- * Submit button that will create and store list on the server, hide the list creation popup
+ * Create button that will create list, hide the list creation popup
  * and show the create items form;
  */
 function setupCreateListButtons() {
     const newButton = document.getElementById("popup"); //New (list) button
     const closeCreateList = document.getElementById("close-button");//close button
     const createList = document.getElementById("create-list"); //get the aside element that contains the create new list form;
-    const submitButton = document.getElementById("submit-list"); //get the submit button
+    const createButton = document.getElementById("create-list-button"); //get the create button
 
     newButton.addEventListener("click", () => {
         createList.style.display = "block";
@@ -22,10 +22,10 @@ function setupCreateListButtons() {
     });
 
     /**
-     * when submit button is clicked: submit list to localStorage, hides the popup,
-     * and show the create item form;
+     * when create button is clicked: hides the popup,
+     * and show the create item form with list name on top;
      */
-    submitButton.addEventListener("click", () => {
+    createButton.addEventListener("click", () => {
 
         const listName = document.getElementById("list-name").value;
         const category = document.getElementById("category").value;
