@@ -47,7 +47,7 @@ function setupCreateListButtons() {
  * Add event listener to delete and savebutton;
  */
 function setupListButtons() {
-    const addItem = document.getElementById("add-item");
+    const addItem = document.getElementById("add-item"); //getting the form for new item
     const newList = new MyList();
     let id = 0;
 
@@ -84,13 +84,13 @@ function setupSaveButton(newList) {
     saveListButton.addEventListener("click", () => {
         
         if(emptyDropDown){
-            dropdownMenu.innerHTML = `<div id="${listName}">
+            dropdownMenu.innerHTML = `<div id="${listName}" class="lists-on-dropdown">
             ${listName}
             </div>
             `
         }
         else{
-            dropdownMenu.innerHTML += `<div id="${listName}">
+            dropdownMenu.innerHTML += `<div id="${listName}" class="lists-on-dropdown"">
             ${listName}
             </div>
             `
@@ -104,15 +104,17 @@ function setupSaveButton(newList) {
 /**
  * Open list when clicked on the name in the dropdown menu;
  */
-function setupDropdownMenuDivs(listName) {
+function setupDropdownMenuDivs() {
     const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
-    const list = document.getElementById(listName);
+    const listNames = document.getElementsByClassName("lists-on-dropdown"); //getting all the div with list names that the user created
 
-    list.addEventListener("click", () => {
-        //retrieve info from storage
+    for(let list of listNames) {
+        list.addEventListener("click", () => {
+            //retrieve info from storage
 
-        dropdownMenu.style.display = "none";
-    })
+            dropdownMenu.style.display = "none";
+        });
+    }
 }
 
 /**
