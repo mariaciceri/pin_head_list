@@ -1,8 +1,5 @@
-// Import the functions from the SDKs 
 
 import { MyList } from "./my_list.js";
-import { ListManager } from "./my_list_manager.js";
-
 
 /**
  * Show popup window for creating a new list;
@@ -24,8 +21,10 @@ function setupCreateListButtons() {
         createList.style.display = "none";
     });
 
-    // when submit button is clicked: submit list to localStorage, hides the popup,
-    // and show the create item form.
+    /**
+     * when submit button is clicked: submit list to localStorage, hides the popup,
+     * and show the create item form;
+     */
     submitButton.addEventListener("click", () => {
 
         const listName = document.getElementById("list-name").value;
@@ -44,8 +43,8 @@ function setupCreateListButtons() {
 };
 
 /**
- * Creates new item with unique ID and insert them in the HTML. 
- * Add event listener to delete and savebutton.
+ * Creates new item with unique ID and insert them in the HTML; 
+ * Add event listener to delete and savebutton;
  */
 function setupListButtons() {
     const addItem = document.getElementById("add-item");
@@ -74,20 +73,58 @@ function setupListButtons() {
 }
 
 /**
- * Save list button
+ * Save list button event listener;
  */
 function setupSaveButton(newList) {
     const listName = document.getElementById("list-title").innerText
     const saveListButton = document.getElementById("save-list");
+    const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
+    const emptyDropDown = document.getElementById("no-list-to-display");
+
     saveListButton.addEventListener("click", () => {
-        newList.onSaveButtonClicked(listName);
         
-        const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
-        dropdownMenu.innerHTML = `<div id="${listName}">
-        ${listName}
-        </div>
-        `
+        if(emptyDropDown){
+            dropdownMenu.innerHTML = `<div id="${listName}">
+            ${listName}
+            </div>
+            `
+        }
+        else{
+            dropdownMenu.innerHTML += `<div id="${listName}">
+            ${listName}
+            </div>
+            `
+        }      
+        newList.onSaveButtonClicked(listName);
+        setupDropdownMenuDivs(listName);
     });
+    
+}
+
+/**
+ * Open list when clicked on the name in the dropdown menu;
+ */
+function setupDropdownMenuDivs(listName) {
+    const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
+    const list = document.getElementById(listName);
+
+    list.addEventListener("click", () => {
+        //retrieve info from storage
+
+        dropdownMenu.style.display = "none";
+    })
+}
+
+/**
+ * Set up My Lists button to show dropdown menu with created lists name;
+ */
+function setupMyListsButton() {
+    const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
+    const myListsButton = document.getElementById("my-lists");
+
+    myListsButton.addEventListener("click", () => {
+        dropdownMenu.style.display = "block";
+    })
 }
 
 /**
@@ -107,8 +144,8 @@ function setupDeleteItemButton(newList) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {   
-    
     setupCreateListButtons();
+    setupMyListsButton();
 });
 
 
