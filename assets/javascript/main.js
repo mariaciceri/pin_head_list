@@ -24,9 +24,9 @@ function setupCreateListButtons() {
         createList.style.display = "none";
     });
 
-    // when submit button is clicked: submit list to Firebase, hides the popup,
+    // when submit button is clicked: submit list to localStorage, hides the popup,
     // and show the create item form.
-    submitButton.addEventListener("click", (event) => {
+    submitButton.addEventListener("click", () => {
 
         const listName = document.getElementById("list-name").value;
         const category = document.getElementById("category").value;
@@ -37,13 +37,17 @@ function setupCreateListButtons() {
         createList.style.display = "none";
         listTitle.innerHTML = listName;
         list.style.display = "block";
+
+        //will setup the buttons for the new list and create an instance of MyList
+        setupListButtons();
     });
 };
 
 /**
- * Creates new item with unique ID and insert them in the HTML. Add event listener to delete button.
+ * Creates new item with unique ID and insert them in the HTML. 
+ * Add event listener to delete and savebutton.
  */
-function setupAddButtons() {
+function setupListButtons() {
     const addItem = document.getElementById("add-item");
     const newList = new MyList();
     let id = 0;
@@ -99,7 +103,6 @@ function setupDeleteItemButton(newList) {
 document.addEventListener("DOMContentLoaded", () => {   
     
     setupCreateListButtons();
-    setupAddButtons();
 });
 
 
