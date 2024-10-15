@@ -104,20 +104,24 @@ function setupListButtons() {
         id++;
     });
 
-    setupSaveButton(newList);
+    setupSaveButton(newList, "");
 }
 
 /**
  * Save list button event listener;
  */
 function setupSaveButton(newList) {
-    const listName = document.getElementById("list-title").innerText
     const saveListButton = document.getElementById("save-list");
+    const listTitle = document.getElementById("list-title");
+    const listName = listTitle.innerHTML;
 
-    saveListButton.addEventListener("click", () => {
+    // Remove the old event listener before adding a new one
+    const newSaveButton = saveListButton.cloneNode(true);
+    saveListButton.parentNode.replaceChild(newSaveButton, saveListButton);
 
+    newSaveButton.addEventListener("click", () => {
         newList.onSaveButtonClicked(listName);
-        setupDropdownMenuDivs(newList);
+        setupDropdownMenuDivs(newList); // Updating the dropdown after saving
     });
     
 }
@@ -127,7 +131,7 @@ function setupSaveButton(newList) {
  */
 function setupDropdownMenuDivs(newList) {
     const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
-    const listNames = document.getElementsByClassName("lists-on-dropdown"); //getting all the div with list names that the user created
+    const listNames = document.getElementsByClassName("lists-on-dropdown"); // getting all the div with list names that the user created
     const listOfItems = document.getElementById("display-items");
 
     for (let list of listNames) {
@@ -138,21 +142,27 @@ function setupDropdownMenuDivs(newList) {
                 const listTitle = document.getElementById("list-title")
                 listTitle.innerHTML = listName;
                 listOfItems.innerHTML = "";
-                
-                for(const itemId in selectedList) {
+
+                for (const itemId in selectedList) {
                     const item = selectedList[itemId];
                     listOfItems.innerHTML += `<div class="list-items" id=${itemId}>
                         <div>${item.name}</div>
                         <div class="item-price">${item.price}</div>
                         <div class="item-place">${item.place}</div>
                         <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
-                    </div>
-                `
+                    </div>`;
                 }
+
+                setupDeleteItemButton(newList); // Set up delete item buttons
+
+                // Re-map the save button for the selected list
+                setupSaveButton(newList);
+
                 dropdownMenu.style.display = "none";
             });
-            list.hasClickListener = true; // Mark this element as having a listener
-        }
+            list.hasClickListener = true;
+    
+        } 
     }
 }
 
@@ -203,9 +213,4 @@ document.addEventListener("DOMContentLoaded", () => {
     //will setup the buttons for the new list and create an instance of MyList
     setupListButtons(); 
 });
-
-
-
-
-
 

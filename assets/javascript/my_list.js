@@ -23,7 +23,6 @@ export class MyList {
         return this.storedItems;
     }
 
-
     deleteItemFromStoredItems(itemId) {
         delete this.storedItems[itemId];
     }
