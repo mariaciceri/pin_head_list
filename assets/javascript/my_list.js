@@ -19,7 +19,8 @@ export class MyList {
     }
 
     retrieveListByName(listName) {
-        this.storedItems = this.newList._retrieveListByName(listName, storedItems);
+        this.storedItems = this.newList._retrieveListByName(listName);
+        return this.storedItems;
     }
 
 
