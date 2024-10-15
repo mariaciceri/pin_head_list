@@ -12,8 +12,7 @@ function setupCreateListButtons() {
     const closeCreateList = document.getElementById("close-button");//close button
     const createList = document.getElementById("create-list"); //get the aside element that contains the create new list form;
     const createButton = document.getElementById("create-list-button"); //get the create button
-    const list = document.getElementById("list");
-    const listTitle = document.getElementById("list-title")
+
 
     newButton.addEventListener("click", () => {
         createList.style.display = "block";
@@ -34,11 +33,13 @@ function setupCreateListButtons() {
         //retrieve or create shopping lists object
         const lists = JSON.parse(localStorage.getItem("shoppingLists")) || {};
 
+        //create list to be stored in localStorage
         lists[listName] = {
             storedItems: {},
             listVisible: true
         }
 
+        //save newly created list in localStorage
         localStorage.setItem("shoppingLists", JSON.stringify(lists));
 
         //reload the page to refresh event listeners
@@ -47,16 +48,34 @@ function setupCreateListButtons() {
     
 };
 
-const lists = JSON.parse(localStorage.getItem("shoppingLists"));
-for(const listName in lists) {
-    const list = document.getElementById("list");
-    const listTitle = document.getElementById("list-title")
-    
-    if (lists[listName].listVisible) {
-        listTitle.innerHTML = listName;
-        list.style.display = "block";
+//works when creating new list, if list name already exists, it doesnt go there
+(() => {
+    const lists = JSON.parse(localStorage.getItem("shoppingLists"));
+    for(const listName in lists) {
+        const list = document.getElementById("list");
+        const listTitle = document.getElementById("list-title")
+        const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
+        const emptyDropDown = document.getElementById("no-list-to-display");
+
+        if (lists[listName].listVisible) {
+            listTitle.innerHTML = listName;
+            list.style.display = "block";
+
+            if (emptyDropDown) {
+                dropdownMenu.innerHTML = `<div id="${listName}" class="lists-on-dropdown">
+            ${listName}
+            </div>
+            `
+            }
+            else {
+                dropdownMenu.innerHTML += `<div id="${listName}" class="lists-on-dropdown"">
+            ${listName}
+            </div>
+            `
+            }      
+        }
     }
-}
+})();
 
 /**
  * Creates new item with unique ID and insert them in the HTML; 
@@ -94,23 +113,8 @@ function setupListButtons() {
 function setupSaveButton(newList) {
     const listName = document.getElementById("list-title").innerText
     const saveListButton = document.getElementById("save-list");
-    const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
-    const emptyDropDown = document.getElementById("no-list-to-display");
 
     saveListButton.addEventListener("click", () => {
-        
-        if(emptyDropDown){
-            dropdownMenu.innerHTML = `<div id="${listName}" class="lists-on-dropdown">
-            ${listName}
-            </div>
-            `
-        }
-        else{
-            dropdownMenu.innerHTML += `<div id="${listName}" class="lists-on-dropdown"">
-            ${listName}
-            </div>
-            `
-        }      
         newList.onSaveButtonClicked(listName);
         setupDropdownMenuDivs(listName);
     });
