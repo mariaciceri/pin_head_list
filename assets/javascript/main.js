@@ -12,6 +12,8 @@ function setupCreateListButtons() {
     const closeCreateList = document.getElementById("close-button");//close button
     const createList = document.getElementById("create-list"); //get the aside element that contains the create new list form;
     const createButton = document.getElementById("create-list-button"); //get the create button
+    const list = document.getElementById("list");
+    const listTitle = document.getElementById("list-title")
 
     newButton.addEventListener("click", () => {
         createList.style.display = "block";
@@ -26,21 +28,35 @@ function setupCreateListButtons() {
      * and show the create item form with list name on top;
      */
     createButton.addEventListener("click", () => {
-
         const listName = document.getElementById("list-name").value;
         const category = document.getElementById("category").value;
-        const date = new Date().toISOString();
-        const list = document.getElementById("list");
-        const listTitle = document.getElementById("list-title");
 
-        createList.style.display = "none";
+        //retrieve or create shopping lists object
+        const lists = JSON.parse(localStorage.getItem("shoppingLists")) || {};
+
+        lists[listName] = {
+            storedItems: {},
+            listVisible: true
+        }
+
+        localStorage.setItem("shoppingLists", JSON.stringify(lists));
+
+        //reload the page to refresh event listeners
+        location.reload();
+    });
+    
+};
+
+const lists = JSON.parse(localStorage.getItem("shoppingLists"));
+for(const listName in lists) {
+    const list = document.getElementById("list");
+    const listTitle = document.getElementById("list-title")
+    
+    if (lists[listName].listVisible) {
         listTitle.innerHTML = listName;
         list.style.display = "block";
-
-        //will setup the buttons for the new list and create an instance of MyList
-        setupListButtons();
-    });
-};
+    }
+}
 
 /**
  * Creates new item with unique ID and insert them in the HTML; 
@@ -123,10 +139,19 @@ function setupDropdownMenuDivs() {
 function setupMyListsButton() {
     const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
     const myListsButton = document.getElementById("my-lists");
+    const body = document.getElementsByTagName("body")[0];
 
     myListsButton.addEventListener("click", () => {
         dropdownMenu.style.display = "block";
     })
+
+    body.addEventListener("click", (event) => {
+        if(event.target !== myListsButton && !myListsButton.contains(event.target)) 
+        {
+            dropdownMenu.style.display = "none";
+        }
+    })
+
 }
 
 /**
@@ -148,6 +173,8 @@ function setupDeleteItemButton(newList) {
 document.addEventListener("DOMContentLoaded", () => {   
     setupCreateListButtons();
     setupMyListsButton();
+    //will setup the buttons for the new list and create an instance of MyList
+    setupListButtons(); 
 });
 
 
