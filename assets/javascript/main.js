@@ -63,15 +63,15 @@ function setupCreateListButtons() {
 
             if (emptyDropDown) {
                 dropdownMenu.innerHTML = `<div id="${listName}" class="lists-on-dropdown">
-            ${listName}
-            </div>
-            `
+                ${listName}
+                </div>
+                `
             }
             else {
                 dropdownMenu.innerHTML += `<div id="${listName}" class="lists-on-dropdown"">
-            ${listName}
-            </div>
-            `
+                ${listName}
+                </div>
+                `
             }      
         }
     }
@@ -79,7 +79,7 @@ function setupCreateListButtons() {
 
 /**
  * Creates new item with unique ID and insert them in the HTML; 
- * Add event listener to delete and savebutton;
+ * Add event listener to delete and save button;
  */
 function setupListButtons() {
     const addItem = document.getElementById("add-item"); //getting the form for new item
@@ -115,30 +115,50 @@ function setupSaveButton(newList) {
     const saveListButton = document.getElementById("save-list");
 
     saveListButton.addEventListener("click", () => {
+
         newList.onSaveButtonClicked(listName);
-        setupDropdownMenuDivs(listName);
+        setupDropdownMenuDivs(newList);
     });
     
 }
 
 /**
- * Open list when clicked on the name in the dropdown menu;
+ * Add event listener to open list when clicked on the name in the dropdown menu;
  */
-function setupDropdownMenuDivs() {
+function setupDropdownMenuDivs(newList) {
     const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
     const listNames = document.getElementsByClassName("lists-on-dropdown"); //getting all the div with list names that the user created
+    const listOfItems = document.getElementById("display-items");
 
-    for(let list of listNames) {
-        list.addEventListener("click", () => {
-            //retrieve info from storage
-
-            dropdownMenu.style.display = "none";
-        });
+    for (let list of listNames) {
+        if (!list.hasClickListener) { // Check if listener is already added
+            list.addEventListener("click", () => {
+                const listName = list.id;
+                const selectedList = newList.retrieveListByName(listName);
+                const listTitle = document.getElementById("list-title")
+                listTitle.innerHTML = listName;
+                listOfItems.innerHTML = "";
+                
+                for(const itemId in selectedList) {
+                    const item = selectedList[itemId];
+                    listOfItems.innerHTML += `<div class="list-items" id=${itemId}>
+                        <div>${item.name}</div>
+                        <div class="item-price">${item.price}</div>
+                        <div class="item-place">${item.place}</div>
+                        <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
+                    </div>
+                `
+                }
+                dropdownMenu.style.display = "none";
+            });
+            list.hasClickListener = true; // Mark this element as having a listener
+        }
     }
 }
 
 /**
- * Set up My Lists button to show dropdown menu with created lists name;
+ * Set up My Lists button to show dropdown menu with created lists name,
+ * and hide it when clicked outside the button;
  */
 function setupMyListsButton() {
     const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
@@ -159,7 +179,7 @@ function setupMyListsButton() {
 }
 
 /**
- * Delete item from the HTML
+ * Delete item from the HTML and from the stored items;
  */
 function setupDeleteItemButton(newList) {
     let deleteButtons = document.getElementsByClassName("delete-item");
@@ -174,6 +194,9 @@ function setupDeleteItemButton(newList) {
     }
 }
 
+/**
+ * Set up event listeners for the initial buttons;
+ */
 document.addEventListener("DOMContentLoaded", () => {   
     setupCreateListButtons();
     setupMyListsButton();
