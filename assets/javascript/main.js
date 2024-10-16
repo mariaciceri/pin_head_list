@@ -52,7 +52,7 @@ function setupCreateListButtons() {
 (() => {
     const lists = JSON.parse(localStorage.getItem("shoppingLists"));
     for(const listName in lists) {
-        const list = document.getElementById("list");
+        const list = document.getElementById("list"); //aside element with list title and add item form
         const listTitle = document.getElementById("list-title")
         const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
         const emptyDropDown = document.getElementById("no-list-to-display");
@@ -84,7 +84,7 @@ function setupCreateListButtons() {
 function setupListButtons() {
     const addItem = document.getElementById("add-item"); //getting the form for new item
     const newList = new MyList();
-    let id = 0;
+    let id = localStorage.getItem('lastItemId') ? parseInt(localStorage.getItem('lastItemId')) : 0;
 
     addItem.addEventListener("click", () => {
         const itemName = document.getElementById("item-name").value;
@@ -102,9 +102,10 @@ function setupListButtons() {
         newList.onAddButtonClicked(itemName, itemPrice, itemPlace, id);
         setupDeleteItemButton(newList);
         id++;
+        localStorage.setItem('lastItemId', id);
     });
 
-    setupSaveButton(newList, "");
+    setupSaveButton(newList);
 }
 
 /**
@@ -152,7 +153,7 @@ function setupDropdownMenuDivs(newList) {
                     </div>`;
                 }
 
-                setupDeleteItemButton(newList);
+                setupDeleteItemButton(newList);//must pass an instance of MyList class that correspond to the list we are iterating in
                 setupSaveButton(newList); // Re-map the save button for the selected list
                 dropdownMenu.style.display = "none";
             });
@@ -222,8 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setupCreateListButtons(); // Setup event listeners for creating a new list
     setupMyListsButton(); // Setup event listener for the dropdown menu
-    setupListButtons();
-
+    setupListButtons(); //this should be here, wont need add button unless have a new list
 });
 
 function showList(listName) {
