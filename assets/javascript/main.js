@@ -113,17 +113,16 @@ function setupListButtons() {
 function setupSaveButton(newList) {
     const saveListButton = document.getElementById("save-list");
     const listTitle = document.getElementById("list-title");
-    const listName = listTitle.innerHTML;
-
-    // Remove the old event listener before adding a new one
+    //clone the save button to remove the old event listener
     const newSaveButton = saveListButton.cloneNode(true);
+    //replace the old button with the new one
     saveListButton.parentNode.replaceChild(newSaveButton, saveListButton);
-
+    
     newSaveButton.addEventListener("click", () => {
+        const listName = listTitle.innerHTML;
         newList.onSaveButtonClicked(listName);
         setupDropdownMenuDivs(newList); // Updating the dropdown after saving
     });
-    
 }
 
 /**
@@ -131,21 +130,21 @@ function setupSaveButton(newList) {
  */
 function setupDropdownMenuDivs(newList) {
     const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
-    const listNames = document.getElementsByClassName("lists-on-dropdown"); // getting all the div with list names that the user created
+    const listNames = document.getElementsByClassName("lists-on-dropdown");
     const listOfItems = document.getElementById("display-items");
 
     for (let list of listNames) {
-        if (!list.hasClickListener) { // Check if listener is already added
+        if (!list.hasClickListener) {
             list.addEventListener("click", () => {
                 const listName = list.id;
                 const selectedList = newList.retrieveListByName(listName);
-                const listTitle = document.getElementById("list-title")
+                const listTitle = document.getElementById("list-title");
                 listTitle.innerHTML = listName;
                 listOfItems.innerHTML = "";
 
                 for (const itemId in selectedList) {
                     const item = selectedList[itemId];
-                    listOfItems.innerHTML += `<div class="list-items" id=${itemId}>
+                    listOfItems.innerHTML += `<div class="list-items" id="${itemId}">
                         <div>${item.name}</div>
                         <div class="item-price">${item.price}</div>
                         <div class="item-place">${item.place}</div>
@@ -153,16 +152,12 @@ function setupDropdownMenuDivs(newList) {
                     </div>`;
                 }
 
-                setupDeleteItemButton(newList); // Set up delete item buttons
-
-                // Re-map the save button for the selected list
-                setupSaveButton(newList);
-
+                setupDeleteItemButton(newList);
+                setupSaveButton(newList); // Re-map the save button for the selected list
                 dropdownMenu.style.display = "none";
             });
             list.hasClickListener = true;
-    
-        } 
+        }
     }
 }
 
@@ -204,13 +199,55 @@ function setupDeleteItemButton(newList) {
     }
 }
 
+
 /**
  * Set up event listeners for the initial buttons;
  */
 document.addEventListener("DOMContentLoaded", () => {   
-    setupCreateListButtons();
-    setupMyListsButton();
-    //will setup the buttons for the new list and create an instance of MyList
-    setupListButtons(); 
+    const lists = JSON.parse(localStorage.getItem("shoppingLists")) || {};
+    const listKeys = Object.keys(lists)
+
+
+    if (lists && listKeys.length) {
+        // If lists exist, get the last list and show it
+        const lastListName = listKeys[listKeys.length - 1];
+        showList(lastListName); // A function to display the list
+        
+        setupDropdownMenuDivs(new MyList());
+    } else {
+        // If no lists, show the popup for creating a new list
+        const createListPopup = document.getElementById("create-list");
+        createListPopup.style.display = "block";
+    }
+
+    setupCreateListButtons(); // Setup event listeners for creating a new list
+    setupMyListsButton(); // Setup event listener for the dropdown menu
+    setupListButtons();
+
 });
+
+function showList(listName) {
+    const lists = JSON.parse(localStorage.getItem("shoppingLists"));
+    const selectedList = lists[listName].storedItems;
+    const listTitle = document.getElementById("list-title");
+    const listOfItems = document.getElementById("display-items");
+
+    listTitle.innerHTML = listName;
+    listOfItems.innerHTML = "";
+
+    // Populate the items
+    for (const itemId in selectedList) {
+        const item = selectedList[itemId];
+        listOfItems.innerHTML += `<div class="list-items" id=${itemId}>
+            <div>${item.name}</div>
+            <div class="item-price">${item.price}</div>
+            <div class="item-place">${item.place}</div>
+            <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
+        </div>`;
+    }
+
+    setupDeleteItemButton(new MyList()); // Setup delete buttons
+}
+
+
 
