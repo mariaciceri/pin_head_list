@@ -5,12 +5,14 @@ export class ListManager {
     }
 
     _onSaveButtonClicked(listName, storedItems) {
-        //retrieves what is saved already or creates an empty object;
+        //retrieves what is saved already;
         const lists = JSON.parse(localStorage.getItem('shoppingLists'));
+    
         //add the new list on the storage;
-        lists[listName] = {
-            storedItems: storedItems,
-            listVisible: true }; //do I even need this line here?
+        if (lists[listName]) {
+            // If the list exists, merge the existing storedItems with the new ones
+            lists[listName].storedItems = Object.assign({}, lists[listName].storedItems, storedItems);
+        } 
 
         //saves the new list on the storage;
         localStorage.setItem('shoppingLists', JSON.stringify(lists))

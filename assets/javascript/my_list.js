@@ -23,7 +23,10 @@ export class MyList {
         return this.storedItems;
     }
 
+    // not deleting anymore
     deleteItemFromStoredItems(itemId) {
+        // const shoppingLists = JSON.parse(localStorage.getItem('shoppingLists'));
+        // this.storedItems = shoppingLists[listName].storedItems;
         delete this.storedItems[itemId];
     }
        
