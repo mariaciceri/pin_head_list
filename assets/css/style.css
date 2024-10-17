@@ -178,8 +178,13 @@ footer button {
     height: fit-content;
 }
 
-.list h1 {
+.list-header {
+    display: flex;
     margin: 0 10px;
+}
+
+.list-header h2 {
+    font-size: small; 
 }
 
 /* save list button */
