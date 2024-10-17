@@ -37,17 +37,21 @@
                 <label for="category">Category</label>
                 <br>
                 <select name="category" id="category" required>
-                    <option value="food">Groceries</option>
-                    <option value="pets">Pet Shop</option>
-                    <option value="fashion">Fashion</option>
-                    <option value="pharmacy">Pharmacy</option>
-                    <option value="other" selected>Other</option>
+                    <option value="Food">Groceries</option>
+                    <option value="Pets">Pet Shop</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Pharmacy">Pharmacy</option>
+                    <option value="To-do">To-do</option>
+                    <option value="Other" selected>Other</option>
                 </select>
                 <button type="reset" id="create-list-button" class="create-list-button">Create</button>
             </form>
         </aside>
         <aside class="list" id="list">
-            <h1 id="list-title"></h1>
+            <div class="list-header">
+                <h1 id="list-title"></h1>
+                <h2 id="list-category"></h2>
+            </div>
             <div class="display-items" id="display-items">
             </div>
             <div>
