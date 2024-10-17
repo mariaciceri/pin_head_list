@@ -20,7 +20,7 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 + Footer
     + In the footer there is one button with tag "New" indicating that a new list can be created when button clicked;
 
-    ![Page's footer](assets/readme-images/footer.png)
+    ![Page's footer with delete and new button](assets/readme-images/footer.png)
 
 + Popup for list creation
     + When opening for the first time, the popup will automatically open. If not first time, the user must click on the new button for it to open.
@@ -30,7 +30,7 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 + Add item layout
     + After creating a new list, the list name will be displayed on top and the form for creating a new item will show togehter with a add button. The "add" button inserts the newly created item above the input form with a "x" at the end, indicating that the item can be removed. Below this area, there is a "save" button indicating that the list must be saved otherwise will be lost when refrashing the page.
 
-    //image of the whole thing//
+    ![Test list title, add item form, add and save button](assets/readme-images/body-title-buttons.png)
 
 ### Features left to implement
 
