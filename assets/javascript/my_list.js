@@ -9,24 +9,34 @@ export class MyList {
         this.newList = new ListManager();
     }
 
-    onAddButtonClicked(itemName, itemPrice, itemPlace, id) {
+    onAddButtonClicked(itemName, itemPrice, itemPlace, id, listName) {
+        const currentItems = this.retrieveListByName(listName);
+        console.log(listName, "inside onAddButtonClicked");
         const newItem = new MyItem(itemName, itemPrice, itemPlace);
-        this.storedItems[id] = newItem; 
+        
+        if(currentItems.length === 0) {
+            this.storedItems[id] = newItem;
+        }
+        else {
+            this.storedItems = currentItems;
+            this.storedItems[id] = newItem;
+        }
+        console.log(this.storedItems, "inside onAddButtonClicked");
     }
 
-    onSaveButtonClicked (listName) {
-        this.newList._onSaveButtonClicked(listName, this.storedItems);
+    onSaveButtonClicked (listName, category) {
+        console.log(this.storedItems, "inside onSaveButtonClicked"); 
+        this.newList._onSaveButtonClicked(listName, this.storedItems, category);
     }
 
     retrieveListByName(listName) {
-        this.storedItems = this.newList._retrieveListByName(listName);
+        this.storedItems = this.newList._retrieveListByName(listName); //it is retrieving the stored items correctly;
+        console.log(this.storedItems, "inside retrieveListByName");
         return this.storedItems;
     }
 
     // not deleting anymore
     deleteItemFromStoredItems(itemId) {
-        // const shoppingLists = JSON.parse(localStorage.getItem('shoppingLists'));
-        // this.storedItems = shoppingLists[listName].storedItems;
         delete this.storedItems[itemId];
     }
        

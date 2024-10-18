@@ -6,7 +6,9 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    max-width: 600px;
 }
+
 
 body {
     background-color: #EDDDDD;
@@ -23,9 +25,9 @@ header {
     background-image: linear-gradient(#81171b, #C75146, #EA8C55, #EDDEDE);
     background-color: #C75146;
     position: fixed;
-    width: 100%;
     height: auto;
     display: flex;
+    width: 100%;
     font-family: "Trirong", serif;
     font-size: small;
     justify-content: space-between;
@@ -52,8 +54,8 @@ main {
 
 footer {
     background-color: #81171b;
-    width: 100%;
     height: 3rem;
+    width: 100%;
     position: fixed;
     bottom: 0;
     display: flex;
@@ -190,7 +192,7 @@ footer button {
 /* save list button */
 .save-list {
     position: fixed;
-    right: 20px;
+    right: 100px;
     background-color: #01110A;
     border-radius: 5px;
     color: #EDDEDE;

@@ -4,15 +4,15 @@ export class ListManager {
     constructor() {
     }
 
-    _onSaveButtonClicked(listName, storedItems) {
+    _onSaveButtonClicked(listName, storedItems, category) {
         //retrieves what is saved already;
         const lists = JSON.parse(localStorage.getItem('shoppingLists'));
-    
+
         //add the new list on the storage;
-        if (lists[listName]) {
-            // If the list exists, merge the existing storedItems with the new ones
-            lists[listName].storedItems = Object.assign({}, lists[listName].storedItems, storedItems);
-        } 
+        lists[listName] = {
+            storedItems: storedItems,
+            category: category //im passing the category everytime I save, it shouldnt erase it when I click save;
+        };
 
         //saves the new list on the storage;
         localStorage.setItem('shoppingLists', JSON.stringify(lists))
