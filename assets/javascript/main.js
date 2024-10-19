@@ -1,46 +1,53 @@
 
 import { MyList } from "./my_list.js";
+import { MyListManager } from "./my_list_manager.js";
 
+
+function main() {
+    let myListManager = new MyListManager();
+    
+    // Set up event listeners for when the page is reloaded
+    document.addEventListener("DOMContentLoaded", () => {
+        myListManager.loadFromStorage();
+        const lists = myListManager.getMyLists();
+        //get all the keys (list names) from MyListManager;
+        const listKeys = Object.keys(lists);
+        //get the aside element that contains the create new list form;
+        const createListPopup = document.getElementById("create-list");
+
+        //check if there are created lists already;
+        if (listKeys.length) {
+            //if lists exist, get the last list name and show the whole list;
+            const lastListName = listKeys[listKeys.length - 1];
+            //get saved category for the list;
+            const category = lists[lastListName].category;
+            //function to display the list;
+            showList(lastListName, category, lists);
+            setupAddButton(category, lastListName); // Setup add button for the last list;
+            // delete-item*[mapping when every item is added to body]*);
+            populateDropdown(lists);
+        } else {
+            // If no lists, show the popup for creating a new list;
+            createListPopup.style.display = "block";
+        }
+
+        setupNewButton(createListPopup)
+        setupClosePopupButton(createListPopup);
+        setupCreateListButton(myListManager);
+        setupMyListsButton();
+        setupDropdownMenuDivs(lists); //must pass an instance of MyList class that correspond to the list we are iterating in 
+        //----must add eventListener delete list;
+    });
+}
+
+// App entry point
+main();
 
 /**
- * Set up event listeners for when the page is reloaded
- */
-document.addEventListener("DOMContentLoaded", () => {
-    //retrieve the localStorage object with shoppingLists name and if there is none, create one;
-    const lists = JSON.parse(localStorage.getItem("shoppingLists")) || {};
-    //get all the keys (list names) from the localStorage;
-    const listKeys = Object.keys(lists)
-    //get the aside element that contains the create new list form;
-    const createListPopup = document.getElementById("create-list");
-
-    //check if there are created lists already;
-    if (lists && listKeys.length) {
-        //if lists exist, get the last list name and show the whole list;
-        const lastListName = listKeys[listKeys.length - 1];
-        //get saved category for the list;
-        const category = lists[lastListName].category; 
-        //function to display the list;
-        showList(lastListName, category, lists);
-        setupAddButton(category, lastListName); // Setup add button for the last list;
-        // delete-item*[mapping when every item is added to body]*);
-        populateDropdown(lists);
-    } else {
-        // If no lists, show the popup for creating a new list;
-        createListPopup.style.display = "block";
-    }
-
-    setupNewButton(createListPopup)
-    setupClosePopupButton(createListPopup); 
-    setupCreateListButton();
-    setupMyListsButton();
-    setupDropdownMenuDivs(new MyList(), lists); //must pass an instance of MyList class that correspond to the list we are iterating in 
-    //----must add eventListener delete list;
-});
-
-/**
- * Populate the body with the last list added to the local storage
+ * Populate the body with the list named `listName` added to the local storage
  * and set up the delete item buttons for each item in the list;
  * @param {str} listName 
+ * @param {str} category
  * @param {object} lists 
  */
 function showList(listName, category, lists) {
@@ -64,8 +71,8 @@ function showList(listName, category, lists) {
             <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
         </div>`;
     }
-    //must pass an instance of MyList
-    setupDeleteItemButton(new MyList()); // Setup delete buttons for each item;
+    
+    setupDeleteItemButton(lists[listName]); // Setup delete buttons for each item;
 }
 
 
@@ -127,8 +134,9 @@ function setupClosePopupButton(createList) {
 
 /**
  * Set up the create (new list) button in the popup window;
+ * @param {MyListManager} myListManager
  */
-function setupCreateListButton() {
+function setupCreateListButton(myListManager) {
 
     const createButton = document.getElementById("create-list-button"); //get the create button;
     /**
@@ -138,16 +146,7 @@ function setupCreateListButton() {
     createButton.addEventListener("click", () => {
         const listName = document.getElementById("list-name").value;
         const category = document.getElementById("category").value;
-        //retrieve or create shopping lists object
-        const lists = JSON.parse(localStorage.getItem("shoppingLists")) || {};
-
-        //create list to be stored in localStorage
-        lists[listName] = {
-            storedItems: {},
-            category: category
-        }
-        //save newly created list in localStorage
-        localStorage.setItem("shoppingLists", JSON.stringify(lists));
+        myListManager.addToStorage(listName, category);
         //reload the page to refresh event listeners
         location.reload();
     });
@@ -242,6 +241,7 @@ function setupSaveButton(newList, category) {
 
 /**
  * Delete item from the HTML and from the stored items;
+ * @param {MyList} newList
  */
 function setupDeleteItemButton(newList) {
     let deleteButtons = document.getElementsByClassName("delete-item");
@@ -259,7 +259,7 @@ function setupDeleteItemButton(newList) {
 /**
  * Set up event listeners for the dropdown menu divs;
  */
-function setupDropdownMenuDivs(newList, lists) {
+function setupDropdownMenuDivs(lists) {
 
     const listNames = document.getElementsByClassName("lists-on-dropdown");//get all the list names in the dropdown menu;
     const listOfItems = document.getElementById("display-items");//get the element that will display the items;
@@ -272,9 +272,9 @@ function setupDropdownMenuDivs(newList, lists) {
                 //list.id is the list name;
                 const listName = list.id; 
                 //retrieve the list from localStorage;
-                const selectedList = newList.retrieveListByName(listName); //retornando a list dos items certos de cada lista;
+                const selectedList = lists[listName]; //retornando a list dos items certos de cada lista;
                 //get the category of the list;
-                const category = lists[listName].category;
+                const category = selectedList.category;
                 //get the elements to display the list name and category;
                 const listTitle = document.getElementById("list-title");
                 const listCategory = document.getElementById("list-category");
@@ -283,8 +283,8 @@ function setupDropdownMenuDivs(newList, lists) {
                 listCategory.innerHTML = `(${category})`;
                 listOfItems.innerHTML = "";
 
-                for (const itemId in selectedList) {
-                    const item = selectedList[itemId];
+                for (const itemId in selectedList.getStoredItems) {
+                    const item = selectedList.getItem(itemId);
                     listOfItems.innerHTML += `<div class="list-items" id="${itemId}">
                         <div>${item.name}</div>
                         <div class="item-price">${item.price}</div>
@@ -292,10 +292,10 @@ function setupDropdownMenuDivs(newList, lists) {
                         <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
                     </div>`;
 
-                    setupDeleteItemButton(newList);//must pass an instance of MyList class that correspond to the list we are iterating in
+                    setupDeleteItemButton(selectedList);//must pass an instance of MyList class that correspond to the list we are iterating in
                 }
 
-                setupSaveButton(newList, category);// Re-map the save button for the selected list
+                setupSaveButton(selectedList, category);// Re-map the save button for the selected list
                 setupAddButton(category, listName);// not mapping the add button anymore for the previous lists;
             });
             list.hasClickListener = true;

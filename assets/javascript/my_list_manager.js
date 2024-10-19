@@ -1,7 +1,58 @@
+import { MyList } from "./my_list.js";
+import { MyItem } from "./my_item.js";
 
 //manage lists: create, delete and retrieve;
-export class ListManager {
+export class MyListManager {
     constructor() {
+        this.myLists = {}; // listName: MyList
+        this.localStorageObj = {};
+    }
+
+    /**
+     * Returns `MyList`by name
+     * @param {string} listName 
+     */
+    getMyList(listName) {
+        return this.myLists[listName];
+    }
+
+    getMyLists() {
+        return this.myLists;
+    }
+
+    addToStorage(listName, category) {
+        //create list to be stored in localStorage
+        this.localStorageObj[listName] = {
+            storedItems: {},
+            category: category
+        }
+        //save newly created list in localStorage
+        localStorage.setItem("shoppingLists", JSON.stringify(this.localStorageObj));
+    }
+
+    loadFromStorage() {
+        this.localStorageObj = JSON.parse(localStorage.getItem('shoppingLists')) || {};
+        if (!this.localStorageObj) {
+            return;
+        }
+
+        this.myLists = {};
+
+        for (const listName in this.localStorageObj) {
+            let newList = new MyList();
+            newList.setCategory(this.localStorageObj[listName].category);
+            this.myLists[listName] = newList;
+            
+            for (const id in newList.storedItems) {
+                let myItem = new MyItem(
+                    newList.storedItems[id].name, 
+                    newList.storedItems[id].price, 
+                    newList.storedItems[id].place
+                );
+                
+                newList.addItem(id, myItem);
+            }
+        }
     }
 
     _onSaveButtonClicked(listName, storedItems, category) {

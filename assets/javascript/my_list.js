@@ -1,12 +1,29 @@
 //manage items on the list:  delete
 
 import { MyItem } from "./my_item.js";
-import { ListManager } from "./my_list_manager.js"
+import { MyListManager } from "./my_list_manager.js"
 
 export class MyList {
     constructor() {
-        this.storedItems = {};
-        this.newList = new ListManager();
+        this.storedItems = {}; // itemId: MyItem
+        this.newList = new MyListManager(); // TODO: there should be no list manager in this class
+        this.category = "Other";
+    }
+
+    setCategory(category) {
+        this.category = category;
+    }
+
+    addItem(id, item) {
+        this.storedItems[id] = item;
+    }
+
+    getItem(id) {
+        return this.storedItems[id];
+    }
+
+    getStoredItems() {
+        return this.storedItems;
     }
 
     onAddButtonClicked(itemName, itemPrice, itemPlace, id, listName) {
