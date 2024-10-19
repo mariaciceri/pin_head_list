@@ -17,13 +17,12 @@ function main() {
 
         //check if there are created lists already;
         if (listKeys.length) {
-            //if lists exist, get the last list name and show the whole list;
+            console.log("reload page called");
             const lastListName = listKeys[listKeys.length - 1];
-            //get saved category for the list;
-            const category = lists[lastListName].category;
-            //function to display the list;
-            showList(lastListName, category, lists);
-            setupAddButton(category, lastListName); // Setup add button for the last list;
+            const lastList = myListManager.getMyList(lastListName);
+            showList(lastList);
+            setupAddItemButton(lastList, myListManager); // Setup add button for the last list;
+            setupSaveButton(lastList, myListManager); // Setup save button for the last list;
             // delete-item*[mapping when every item is added to body]*);
             populateDropdown(lists);
         } else {
@@ -35,7 +34,7 @@ function main() {
         setupClosePopupButton(createListPopup);
         setupCreateListButton(myListManager);
         setupMyListsButton();
-        setupDropdownMenuDivs(lists); //must pass an instance of MyList class that correspond to the list we are iterating in 
+        setupDropdownMenuDivs(lists, myListManager); //must pass an instance of MyList class that correspond to the list we are iterating in 
         //----must add eventListener delete list;
     });
 }
@@ -44,26 +43,22 @@ function main() {
 main();
 
 /**
- * Populate the body with the list named `listName` added to the local storage
- * and set up the delete item buttons for each item in the list;
- * @param {str} listName 
- * @param {str} category
- * @param {object} lists 
+ * Populate the body with `myList` and set up the delete item buttons for 
+ * each item in the list.
+ * @param {MyList} myList 
  */
-function showList(listName, category, lists) {
-    
-    const selectedList = lists[listName].storedItems;
+function showList(myList) {
     const listTitle = document.getElementById("list-title");
     const listCategory = document.getElementById("list-category");
     const listOfItems = document.getElementById("display-items");
 
-    listTitle.innerHTML = listName;
-    listCategory.innerHTML = `(${category})`;
+    listTitle.innerHTML = myList.getName();
+    listCategory.innerHTML = `(${myList.getCategory()})`;
     listOfItems.innerHTML = "";
 
     // Populate the items
-    for (const itemId in selectedList) {
-        const item = selectedList[itemId];
+    for (const itemId in myList.getStoredItems()) {
+        const item = myList.getItem(itemId);
         listOfItems.innerHTML += `<div class="list-items" id=${itemId}>
             <div>${item.name}</div>
             <div class="item-price">${item.price}</div>
@@ -72,7 +67,7 @@ function showList(listName, category, lists) {
         </div>`;
     }
     
-    setupDeleteItemButton(lists[listName]); // Setup delete buttons for each item;
+    setupDeleteItemButton(myList); // Setup delete buttons for each item;
 }
 
 
@@ -152,89 +147,68 @@ function setupCreateListButton(myListManager) {
     });
 };
 
-function addButtonEventListeners(newList, listName) {}
+/**
+ * @param {MyList} myList 
+ * @param {MyListManager} myListManager
+ */
+function addButtonOnClick(myList, myListManager) {
+    let id = localStorage.getItem('lastItemId') ? parseInt(localStorage.getItem('lastItemId')) : 0;
+    
+    const itemName = document.getElementById("item-name").value;
+    const itemPrice = document.getElementById("item-price").value;
+    const itemPlace = document.getElementById("item-place").value;
+    //get the element that will display the items;
+    const listOfItems = document.getElementById("display-items");
+
+    listOfItems.innerHTML += `<div class="list-items" id=${id}>
+                <div>${itemName}</div>
+                <div class="item-price">${itemPrice}</div>
+                <div class="item-price">${itemPlace}</div>
+                <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
+            </div>
+            `
+    myListManager.onAddItemButtonClicked(myList.getName(), itemName, itemPrice, itemPlace, id);
+    setupDeleteItemButton(myList);
+    id++;
+    //storing the last item id in localStorage in a separate key;
+    localStorage.setItem('lastItemId', id);
+}
 
 /**
  * Set up the add button to add items to the list and display them;
  * Add event listener to delete item button;
  * Increment the item id and store it in localStorage;
+ * @param {MyList} myList
+ * @param {MyListManager} myListManager
  */
-function setupAddButton(category, listName) {
+function setupAddItemButton(myList, myListManager) {
     const addItem = document.getElementById("add-item");//get the add button;
-    const newList = new MyList();
-    let id = localStorage.getItem('lastItemId') ? parseInt(localStorage.getItem('lastItemId')) : 0;
 
-    if(!addItem.hasClickListener) {
-        addItem.addEventListener("click", () => {
-        const itemName = document.getElementById("item-name").value;
-        const itemPrice = document.getElementById("item-price").value;
-        const itemPlace = document.getElementById("item-place").value;
-        //get the element that will display the items;
-        const listOfItems = document.getElementById("display-items"); 
+    //clone the save button to remove the old event listener
+    const newAddButton = addItem.cloneNode(true);
+    //replace the old button with the new one
+    addItem.parentNode.replaceChild(newAddButton, addItem);
 
-        listOfItems.innerHTML += `<div class="list-items" id=${id}>
-            <div>${itemName}</div>
-            <div class="item-price">${itemPrice}</div>
-            <div class="item-price">${itemPlace}</div>
-            <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
-        </div>
-        `
-        newList.onAddButtonClicked(itemName, itemPrice, itemPlace, id, listName);
-        setupDeleteItemButton(newList);
-        id++;
-        //storing the last item id in localStorage in a separate key;
-        localStorage.setItem('lastItemId', id);
-        });
-        addItem.hasClickListener = true;
-    }
-    else {
-        //clone the save button to remove the old event listener
-        const newAddButton = addItem.cloneNode(true);
-        //replace the old button with the new one
-        addItem.parentNode.replaceChild(newAddButton, addItem);
-
-        newAddButton.addEventListener("click", () => {
-            const itemName = document.getElementById("item-name").value;
-            const itemPrice = document.getElementById("item-price").value;
-            const itemPlace = document.getElementById("item-place").value;
-            //get the element that will display the items;
-            const listOfItems = document.getElementById("display-items");
-
-            listOfItems.innerHTML += `<div class="list-items" id=${id}>
-                <div>${itemName}</div>
-                <div class="item-price">${itemPrice}</div>
-                <div class="item-place
-                ">${itemPlace}</div>
-                <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
-            </div>
-            `
-            newList.onAddButtonClicked(itemName, itemPrice, itemPlace, id, listName);
-            setupDeleteItemButton(newList);
-            id++;
-            //storing the last item id in localStorage in a separate key;
-            localStorage.setItem('lastItemId', id);
-        });
-    }
-    setupSaveButton(newList, category);
+    newAddButton.addEventListener("click", () => {
+        addButtonOnClick(myList, myListManager);
+    });
 }
 
 /**
  * Set up the event listener for the save button;
+ * @param {MyList} myList
+ * @param {MyListManager} myListManager
  */
-//removing category from storage after saving for the second time;
-function setupSaveButton(newList, category) {
+function setupSaveButton(myList, myListManager) {
     //save button;
     const saveListButton = document.getElementById("save-list");
-    const listTitle = document.getElementById("list-title");
-    
     //clone the save button to remove the old event listener
     const newSaveButton = saveListButton.cloneNode(true);
     //replace the old button with the new one
     saveListButton.parentNode.replaceChild(newSaveButton, saveListButton);
     
     newSaveButton.addEventListener("click", () => {
-        const listName = listTitle.innerHTML;
-        newList.onSaveButtonClicked(listName, category);
+        myListManager.onSaveButtonClicked(myList);
     });
 }
 
@@ -259,7 +233,7 @@ function setupDeleteItemButton(newList) {
 /**
  * Set up event listeners for the dropdown menu divs;
  */
-function setupDropdownMenuDivs(lists) {
+function setupDropdownMenuDivs(lists, myListManager) {
 
     const listNames = document.getElementsByClassName("lists-on-dropdown");//get all the list names in the dropdown menu;
     const listOfItems = document.getElementById("display-items");//get the element that will display the items;
@@ -272,7 +246,7 @@ function setupDropdownMenuDivs(lists) {
                 //list.id is the list name;
                 const listName = list.id; 
                 //retrieve the list from localStorage;
-                const selectedList = lists[listName]; //retornando a list dos items certos de cada lista;
+                const selectedList = lists[listName];
                 //get the category of the list;
                 const category = selectedList.category;
                 //get the elements to display the list name and category;
@@ -283,7 +257,7 @@ function setupDropdownMenuDivs(lists) {
                 listCategory.innerHTML = `(${category})`;
                 listOfItems.innerHTML = "";
 
-                for (const itemId in selectedList.getStoredItems) {
+                for (const itemId in selectedList.getStoredItems()) {
                     const item = selectedList.getItem(itemId);
                     listOfItems.innerHTML += `<div class="list-items" id="${itemId}">
                         <div>${item.name}</div>
@@ -293,10 +267,10 @@ function setupDropdownMenuDivs(lists) {
                     </div>`;
 
                     setupDeleteItemButton(selectedList);//must pass an instance of MyList class that correspond to the list we are iterating in
-                }
+                } 
 
-                setupSaveButton(selectedList, category);// Re-map the save button for the selected list
-                setupAddButton(category, listName);// not mapping the add button anymore for the previous lists;
+                setupSaveButton(selectedList, myListManager);// Re-map the save button for the selected list
+                setupAddItemButton(selectedList, myListManager);// not mapping the add button anymore for the previous lists;
             });
             list.hasClickListener = true;
         }

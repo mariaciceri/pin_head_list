@@ -4,16 +4,35 @@ import { MyItem } from "./my_item.js";
 import { MyListManager } from "./my_list_manager.js"
 
 export class MyList {
-    constructor() {
+    /**
+     * @param {MyListManager} myListManager 
+     */
+    constructor(myListManager) {
         this.storedItems = {}; // itemId: MyItem
-        this.newList = new MyListManager(); // TODO: there should be no list manager in this class
         this.category = "Other";
+        this.name = "";
     }
 
+    getCategory() {
+        return this.category;
+    }
+    
     setCategory(category) {
         this.category = category;
     }
 
+    getName() {
+        return this.name;
+    }
+
+    setName(name) {
+        this.name = name;
+    }
+
+    /**
+     * @param {string} id
+     * @param {MyItem} item 
+     */
     addItem(id, item) {
         this.storedItems[id] = item;
     }
@@ -23,32 +42,6 @@ export class MyList {
     }
 
     getStoredItems() {
-        return this.storedItems;
-    }
-
-    onAddButtonClicked(itemName, itemPrice, itemPlace, id, listName) {
-        const currentItems = this.retrieveListByName(listName);
-        console.log(listName, "inside onAddButtonClicked");
-        const newItem = new MyItem(itemName, itemPrice, itemPlace);
-        
-        if(currentItems.length === 0) {
-            this.storedItems[id] = newItem;
-        }
-        else {
-            this.storedItems = currentItems;
-            this.storedItems[id] = newItem;
-        }
-        console.log(this.storedItems, "inside onAddButtonClicked");
-    }
-
-    onSaveButtonClicked (listName, category) {
-        console.log(this.storedItems, "inside onSaveButtonClicked"); 
-        this.newList._onSaveButtonClicked(listName, this.storedItems, category);
-    }
-
-    retrieveListByName(listName) {
-        this.storedItems = this.newList._retrieveListByName(listName); //it is retrieving the stored items correctly;
-        console.log(this.storedItems, "inside retrieveListByName");
         return this.storedItems;
     }
 

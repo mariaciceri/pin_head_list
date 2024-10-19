@@ -11,6 +11,7 @@ export class MyListManager {
     /**
      * Returns `MyList`by name
      * @param {string} listName 
+     * @returns {MyList}
      */
     getMyList(listName) {
         return this.myLists[listName];
@@ -20,14 +21,17 @@ export class MyListManager {
         return this.myLists;
     }
 
+    _writeToLocalStorage() {
+        localStorage.setItem("shoppingLists", JSON.stringify(this.localStorageObj));
+    }
+    
     addToStorage(listName, category) {
         //create list to be stored in localStorage
         this.localStorageObj[listName] = {
             storedItems: {},
             category: category
         }
-        //save newly created list in localStorage
-        localStorage.setItem("shoppingLists", JSON.stringify(this.localStorageObj));
+        this._writeToLocalStorage();
     }
 
     loadFromStorage() {
@@ -39,50 +43,55 @@ export class MyListManager {
         this.myLists = {};
 
         for (const listName in this.localStorageObj) {
-            let newList = new MyList();
+            let newList = new MyList(this);
             newList.setCategory(this.localStorageObj[listName].category);
-            this.myLists[listName] = newList;
+            newList.setName(listName);
             
-            for (const id in newList.storedItems) {
+            for (const id in this.localStorageObj[listName].storedItems) {
                 let myItem = new MyItem(
-                    newList.storedItems[id].name, 
-                    newList.storedItems[id].price, 
-                    newList.storedItems[id].place
+                    this.localStorageObj[listName].storedItems[id].name, 
+                    this.localStorageObj[listName].storedItems[id].price, 
+                    this.localStorageObj[listName].storedItems[id].place,
+                    id
                 );
                 
                 newList.addItem(id, myItem);
             }
+
+            this.myLists[listName] = newList;
         }
     }
 
-    _onSaveButtonClicked(listName, storedItems, category) {
-        //retrieves what is saved already;
-        const lists = JSON.parse(localStorage.getItem('shoppingLists'));
+    /**
+     * @param {string} listName 
+     * @param {string} itemName 
+     * @param {string} itemPrice 
+     * @param {string} itemPlace 
+     * @param {int} itemId 
+     */
+    onAddItemButtonClicked(listName, itemName, itemPrice, itemPlace, itemId) {
+        const myItem = new MyItem(itemName, itemPrice, itemPlace, itemId);
+        const myList = this.getMyList(listName);
+        myList.addItem(itemId, myItem);
+        console.log("onAddItemButtonClicked myList", myList);
+    }
 
+    /** 
+     * @param {MyList} myList
+     */
+    onSaveButtonClicked(myList) {
         //add the new list on the storage;
-        lists[listName] = {
-            storedItems: storedItems,
-            category: category //im passing the category everytime I save, it shouldnt erase it when I click save;
+        this.localStorageObj[myList.getName()] = {
+            storedItems: myList.getStoredItems(),
+            category: myList.getCategory() //im passing the category everytime I save, it shouldnt erase it when I click save;
         };
 
-        //saves the new list on the storage;
-        localStorage.setItem('shoppingLists', JSON.stringify(lists))
+        this._writeToLocalStorage();
         console.log("Data saved successfully in localStorage!");
-        alert(`Your list ${listName} has been saved`);
+        alert(`Your list ${myList.getName() } has been saved`);
     }
 
-    _retrieveListByName(listName) {
-        try {
-            const storedList = JSON.parse(localStorage.getItem('shoppingLists'));
-            let storedItems = storedList[listName].storedItems;
-            return storedItems;
-        }
-        catch (error) {
-            console.log("List not found", error);
-        }
-    }
-
-    deleteList() {
+    deleteList(listName) {
 
     }
 
