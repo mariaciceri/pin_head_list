@@ -7,24 +7,36 @@ export class MyList {
     /**
      * @param {MyListManager} myListManager 
      */
-    constructor(myListManager) {
-        this.storedItems = {}; // itemId: MyItem
+    constructor() {
+        this.storedItems = {};
         this.category = "Other";
         this.name = "";
     }
 
+    /**
+     * @returns {string}
+     */
     getCategory() {
         return this.category;
     }
     
+    /**
+     * @returns {string}
+     */
     setCategory(category) {
         this.category = category;
     }
 
+    /**
+     * @returns {string}
+     */
     getName() {
         return this.name;
     }
 
+    /**
+     * @returns {string}
+     */
     setName(name) {
         this.name = name;
     }
@@ -37,17 +49,24 @@ export class MyList {
         this.storedItems[id] = item;
     }
 
-    getItem(id) {
-        return this.storedItems[id];
+    /**
+     * @returns { object }
+     */
+    getItem(itemId) {
+        return this.storedItems[itemId];
     }
 
+    /**
+     * @returns { object }
+     */
     getStoredItems() {
         return this.storedItems;
     }
 
-    // not deleting anymore
+    /**
+     * @param {string} itemId 
+     */
     deleteItemFromStoredItems(itemId) {
         delete this.storedItems[itemId];
-    }
-       
+    } 
 }

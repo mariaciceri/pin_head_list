@@ -22,22 +22,20 @@ function main() {
             showList(lastList);
             setupAddItemButton(lastList, myListManager); // Setup add button for the last list;
             setupSaveButton(lastList, myListManager); // Setup save button for the last list;
-            // delete-item*[mapping when every item is added to body]*);
             populateDropdown(lists);
         } else {
             // If no lists, show the popup for creating a new list;
             createListPopup.style.display = "block";
         }
 
-        setupNewButton(createListPopup)
-        setupClosePopupButton(createListPopup);
-        setupCreateListButton(myListManager);
-        setupMyListsButton();
-        setupDeleteListButton()
-        setupDeleteListNoButton();
-        setupDeleteListYesButton(myListManager);
-        setupDropdownMenuDivs(lists, myListManager); //must pass an instance of MyList class that correspond to the list we are iterating in 
-        //----must add eventListener delete list;
+        setupNewButton(createListPopup)//create new list button;
+        setupClosePopupButton(createListPopup);//close create list popup button;
+        setupCreateListButton(myListManager);//create new list button;
+        setupMyListsButton();//show dropdown menu with created lists name;
+        setupDeleteListButton()//when delete list button is clicked, show the popup;
+        setupDeleteListNoButton();//when NO is clicked, close the popup;
+        setupDeleteListYesButton(myListManager);//when YES is clicked, delete the list;
+        setupDropdownMenuDivs(lists, myListManager);//set up event listeners for the dropdown menu divs;
     });
 }
 
@@ -73,7 +71,10 @@ function showList(myList) {
 }
 
 
-//works when creating new list, if list name already exists, it doesnt go there
+/**
+ * Populate the dropdown menu with the list names;
+ * @param { object } lists 
+ */
 function populateDropdown(lists){
     
     for (const listName in lists) {
@@ -83,7 +84,6 @@ function populateDropdown(lists){
         const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
         const emptyDropDown = document.getElementById("no-list-to-display");
 
-        //it was: lists[listName].listVisible;
         if (lists[listName]) {
             listTitle.innerHTML = listName;
             list.style.display = "block";
@@ -107,7 +107,8 @@ function populateDropdown(lists){
 };
 
 /**
- * Set up New button (opens popup for creating a new list)
+ * Set up New button to open the create list popup;
+ * @param {HTMLElement} createList
  */
 function setupNewButton(createList) {
     const newButton = document.getElementById("popup"); //New (list) button;
@@ -117,6 +118,9 @@ function setupNewButton(createList) {
     });
 }
 
+/**
+ * Set up the delete list button to show the delete list popup;
+ */
 function setupDeleteListButton() {
     const deleteListButton = document.getElementById("delete-list");
     const deleteListPopup = document.getElementById("delete-list-popup");
@@ -126,6 +130,10 @@ function setupDeleteListButton() {
     });
 }
 
+/**
+ * Set up the Yes button to delete the list;
+ * @param {MyListManager} myListManager
+ */
 function setupDeleteListYesButton(myListManager) {
     const deleteListYesButton = document.getElementById("delete-list-yes");
 
@@ -136,6 +144,9 @@ function setupDeleteListYesButton(myListManager) {
     });
 }
 
+/**
+ * Set up the No button to close the delete list popup;
+ */
 function setupDeleteListNoButton() {
     const deleteListNoButton = document.getElementById("delete-list-no");
     const deleteListPopup = document.getElementById("delete-list-popup");
@@ -146,7 +157,7 @@ function setupDeleteListNoButton() {
 }
 
 /**
- * Set up the Close button for the create list popup
+ * Set up the Close button for the create list popup;
  */
 function setupClosePopupButton(createList) {
     //close button;
@@ -195,9 +206,11 @@ function setupCreateListButton(myListManager) {
         const existingList = myListManager.getMyList(listNameInput.value); 
         
         if (existingList) {
-            tooltip.parentElement.classList.add("show"); // Show the tooltip
+            // Show the tooltip
+            tooltip.parentElement.classList.add("show"); 
+            // Hide after 3 seconds
             setTimeout(() => {
-                tooltip.parentElement.classList.remove("show"); // Hide after 3 seconds
+                tooltip.parentElement.classList.remove("show"); 
             }, 3000);
         } 
         else {
@@ -220,7 +233,7 @@ function checkInputs() {
     const itemPlace = document.getElementById("item-place").value.trim();
     const addItemButton = document.getElementById("add-item");
 
-    // Enable the button only if all fields have values
+    // Enable the button only if name field have value;
     if (itemName) {
         addItemButton.disabled = false;
     } 
@@ -229,6 +242,7 @@ function checkInputs() {
     }
 }
 /**
+ * Add item to the list and display it;
  * @param {MyList} myList 
  * @param {MyListManager} myListManager
  */
@@ -262,9 +276,7 @@ function addButtonOnClick(myList, myListManager) {
 }
 
 /**
- * Set up the add button to add items to the list and display them;
- * Add event listener to delete item button;
- * Increment the item id and store it in localStorage;
+ * Set up the event listener for the add button;
  * @param {MyList} myList
  * @param {MyListManager} myListManager
  */
@@ -323,6 +335,8 @@ function setupDeleteItemButton(newList) {
 
 /**
  * Set up event listeners for the dropdown menu divs;
+ * @param { object } lists
+ * @param { MyListManager } myListManager
  */
 function setupDropdownMenuDivs(lists, myListManager) {
 
@@ -369,8 +383,7 @@ function setupDropdownMenuDivs(lists, myListManager) {
 }
 
 /**
- * Set up My Lists button to show dropdown menu with created lists name,
- * and hide it when clicked outside the button;
+ * Show the dropdown menu with the list names;
  */
 function setupMyListsButton() {
     const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
