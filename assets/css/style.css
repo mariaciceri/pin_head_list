@@ -4,21 +4,22 @@
 /* general styles for the page*/
 * {
     box-sizing: border-box;
-    margin: 0;
     padding: 0;
-    max-width: 600px;
+    margin: 0;
 }
 
 
 body {
-    background-color: #EDDDDD;
+    background: url("../images/blindguard.jpg") center center/cover;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     min-height: 100vh;
     position: relative;
     font-family: "Fira Sans Condensed", serif;
     color: #01110A;
+    width: 100%;
+    min-height: 100vh;
+    overflow-y: auto;
 }
 
 header {
@@ -28,11 +29,13 @@ header {
     height: auto;
     display: flex;
     width: 100%;
+    max-width: 600px;
     font-family: "Trirong", serif;
     font-size: small;
     justify-content: space-between;
     align-items: baseline;
     padding: 0 1em;
+    align-self: center;
 }
 
 header img {
@@ -49,13 +52,24 @@ header button {
 }
 
 main {
-    margin: 5rem 0;
+    margin: 2rem auto;
+    padding: 3rem 0;
+    background-color: #EDDDDD;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-grow: 1;
 }
+
 
 footer {
     background-color: #81171b;
     height: 3rem;
     width: 100%;
+    max-width: 600px;
     position: fixed;
     bottom: 0;
     display: flex;
@@ -64,6 +78,7 @@ footer {
     padding: 0 1em;
     border-style: double none none none;
     border-color: #EDDDDD;
+    align-self: center;
 }
 
 footer button {
@@ -104,15 +119,15 @@ footer button {
 }
 
 .header {
-   display: flex;
-   align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .list-form {
     text-align: center;
     padding: 20% 0;
     line-height: 25px;
-    
+
 }
 
 .list-form select {
@@ -149,8 +164,8 @@ footer button {
 .tooltip .tooltip-text {
     visibility: hidden;
     width: 150px;
-    background-color: black;
-    color: white;
+    background-color: #81171b;
+    color: #EDDDDD;
     text-align: center;
     border-radius: 5px;
     padding: 5px;
@@ -214,17 +229,7 @@ footer button {
 }
 
 .list-header h2 {
-    font-size: small; 
-}
-
-/* save list button */
-.save-list {
-    position: fixed;
-    right: 100px;
-    background-color: #01110A;
-    border-radius: 5px;
-    color: #EDDEDE;
-    padding: 5px;
+    font-size: small;
 }
 
 /* delete item button */
@@ -252,5 +257,24 @@ footer button {
     max-width: 150px;
 }
 
+.delete-list-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 100px;
+    background-color: #C75146;
+    z-index: 11;
+    border-radius: 20px;
+    border-style: double;
+    border-color: #EDDDDD;
+}
 
 
+@media screen and (min-width:600px) {
+    .save-list {
+        right: calc((100% - 600px) / 2 + 5px);
+    }
+}

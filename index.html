@@ -4,8 +4,13 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Pin Head lists. A page to store your to-dos or shopping lists">
+    <meta name="keywords" content="lists, organization, to-do, shopping">
+    <meta name="author" content="Maria Ciceri">
     <title>Pin Head Lists</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/pinhead-16.png">
+    <link rel="icon" type="image/x-icon" href="assets/images/pinhead-16.ico">
 </head>
 
 <body>
@@ -64,9 +69,13 @@
                     <input type="text" name="place" id="item-place" placeholder="Where to buy">
                     <button type="button" id="add-item">Add</button>
                 </form>
-                <button type="button" id="save-list" class="save-list">Save</button>
             </div>
         </aside>
+        <span class="delete-list-popup" id="delete-list-popup">
+            <p>Are you sure you want to delete this list?</p>
+            <button type="button" id="delete-list-yes">Yes</button>
+            <button type="button" id="delete-list-no">No</button>
+        </span>
     </main>
 
     <footer>
@@ -75,6 +84,9 @@
         </button>
         <button id="popup">
             New
+        </button>
+        <button type="button" id="save-list">
+            Save
         </button>
     </footer>
 
