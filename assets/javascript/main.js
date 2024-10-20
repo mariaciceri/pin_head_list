@@ -235,17 +235,39 @@ function setupCreateListButton(myListManager) {
  */
 function checkInputs() {
     const itemName = document.getElementById("item-name").value.trim();
-    const itemPrice = document.getElementById("item-price").value.trim();
-    const itemPlace = document.getElementById("item-place").value.trim();
     const addItemButton = document.getElementById("add-item");
 
-    // Enable the button only if name field have value;
+    // Enable the button if item name has a value
     if (itemName) {
         addItemButton.disabled = false;
-    } 
-    else if (!itemName && itemPrice && itemPlace) {
-        addItemButton.disabled = true;
+    } else {
+        addItemButton.disabled = true; // Disable if item name is empty
     }
+}
+
+/**
+ * Set up the event listener for the add button;
+ * @param {MyList} myList
+ * @param {MyListManager} myListManager
+ */
+function setupAddItemButton(myList, myListManager) {
+    const addItem = document.getElementById("add-item");//get the add button;
+    const itemNameInput = document.getElementById("item-name");// get the input field
+
+    itemNameInput.addEventListener("input", checkInputs);
+
+    //clone the save button to remove the old event listener
+    const newAddButton = addItem.cloneNode(true);
+    //replace the old button with the new one
+    addItem.parentNode.replaceChild(newAddButton, addItem);
+
+    newAddButton.disabled = true;
+
+    newAddButton.addEventListener("click", () => {
+        newAddButton.disabled = true;
+        addButtonOnClick(myList, myListManager);
+        itemNameInput.focus();
+    });
 }
 
 /**
@@ -282,29 +304,6 @@ function addButtonOnClick(myList, myListManager) {
     document.getElementById("item-place").value = '';
 }
 
-/**
- * Set up the event listener for the add button;
- * @param {MyList} myList
- * @param {MyListManager} myListManager
- */
-function setupAddItemButton(myList, myListManager) {
-    const addItem = document.getElementById("add-item");//get the add button;
-    const itemNameInput = document.getElementById("item-name");// get the input field
-
-    document.getElementById("item-name").addEventListener("input", checkInputs);
-
-    //clone the save button to remove the old event listener
-    const newAddButton = addItem.cloneNode(true);
-    //replace the old button with the new one
-    addItem.parentNode.replaceChild(newAddButton, addItem);
-    newAddButton.disabled = true;
-
-    newAddButton.addEventListener("click", () => {
-        addButtonOnClick(myList, myListManager);
-        newAddButton.disabled = true;
-        itemNameInput.focus();
-    });
-}
 
 /**
  * Set up the event listener for the save button;
