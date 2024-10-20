@@ -282,8 +282,9 @@ function addButtonOnClick(myList, myListManager) {
  */
 function setupAddItemButton(myList, myListManager) {
     const addItem = document.getElementById("add-item");//get the add button;
+    const itemNameInput = document.getElementById("item-name");// get the input field
 
-    document.getElementById("item-name").addEventListener("input", checkInputs);
+    itemNameInput.addEventListener("input", checkInputs);
 
     //clone the save button to remove the old event listener
     const newAddButton = addItem.cloneNode(true);
@@ -294,6 +295,16 @@ function setupAddItemButton(myList, myListManager) {
     newAddButton.addEventListener("click", () => {
         addButtonOnClick(myList, myListManager);
         newAddButton.disabled = true;
+        itemNameInput.focus();
+    });
+
+    // Check if the pressed key is Enter
+    itemNameInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            addButtonOnClick(myList, myListManager);
+            newAddButton.disabled = true;
+            itemNameInput.focus();
+        }
     });
 }
 
