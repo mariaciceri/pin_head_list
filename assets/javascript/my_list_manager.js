@@ -83,7 +83,7 @@ export class MyListManager {
         //add the new list on the storage;
         this.localStorageObj[myList.getName()] = {
             storedItems: myList.getStoredItems(),
-            category: myList.getCategory() //im passing the category everytime I save, it shouldnt erase it when I click save;
+            category: myList.getCategory() 
         };
 
         this._writeToLocalStorage();

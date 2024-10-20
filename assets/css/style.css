@@ -131,15 +131,43 @@ footer button {
 }
 
 .create-list-button {
-    background-color: #81171b;
     color: #EDDDDD;
     border-style: none;
-    box-shadow: 2px 2px 5px #01110A;
     border-radius: 8px;
     width: 100px;
     height: 26px;
     position: relative;
     margin-top: 35px;
+}
+
+/* tooltip for when list name is already taken */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 150px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 99;
+    bottom: 125%;
+    /* Position above the input */
+    left: 50%;
+    margin-left: -75px;
+    /* Center the tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip.show .tooltip-text {
+    visibility: visible;
+    opacity: 1;
 }
 
 /* item insertion form */

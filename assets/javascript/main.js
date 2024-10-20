@@ -17,7 +17,6 @@ function main() {
 
         //check if there are created lists already;
         if (listKeys.length) {
-            console.log("reload page called");
             const lastListName = listKeys[listKeys.length - 1];
             const lastList = myListManager.getMyList(lastListName);
             showList(lastList);
@@ -128,25 +127,78 @@ function setupClosePopupButton(createList) {
 }
 
 /**
+ * Check if the input field for the list name is not empty;
+ */
+function checkCreateListInputs() {
+    const listName = document.getElementById("list-name").value.trim();
+    const createButton = document.getElementById("create-list-button");
+
+    if (listName) {
+        createButton.disabled = false;
+        createButton.style.backgroundColor = "#81171b";
+        createButton.style.boxShadow = "2px 2px 5px #01110A";
+    } else {
+        createButton.disabled = true;
+        createButton.style.backgroundColor = "gray";
+        createButton.style.boxShadow = "none";
+    }
+}
+
+/**
  * Set up the create (new list) button in the popup window;
  * @param {MyListManager} myListManager
  */
 function setupCreateListButton(myListManager) {
 
-    const createButton = document.getElementById("create-list-button"); //get the create button;
-    /**
-     * when create button is clicked: hides the popup,
-     * and show the create item form with list name on top;
-     */
-    createButton.addEventListener("click", () => {
-        const listName = document.getElementById("list-name").value;
-        const category = document.getElementById("category").value;
-        myListManager.addToStorage(listName, category);
-        //reload the page to refresh event listeners
-        location.reload();
-    });
-};
+    const tooltip = document.getElementById("tooltip");
+    const listNameInput = document.getElementById("list-name");
+    const createButton = document.getElementById("create-list-button"); 
 
+    createButton.disabled = true;
+    createButton.style.backgroundColor = "gray";
+    createButton.style.boxShadow = "none";
+
+    listNameInput.addEventListener("input", checkCreateListInputs);
+    
+    createButton.addEventListener("click", () => {
+        const existingList = myListManager.getMyList(listNameInput.value);
+        console.log("existingList", existingList);
+        console.log("listNameInput", listNameInput.value);  
+        
+        if (existingList) {
+            tooltip.parentElement.classList.add("show"); // Show the tooltip
+            setTimeout(() => {
+                tooltip.parentElement.classList.remove("show"); // Hide after 3 seconds
+            }, 3000);
+        } 
+        else {
+            createButton.disabled = true;
+            const listName = document.getElementById("list-name").value;
+            const category = document.getElementById("category").value;
+            myListManager.addToStorage(listName, category);
+            //reload the page to refresh event listeners
+            location.reload();
+            }
+    });
+}
+
+/**
+ * Check if the input fields for the item name is not empty;
+ */
+function checkInputs() {
+    const itemName = document.getElementById("item-name").value.trim();
+    const itemPrice = document.getElementById("item-price").value.trim();
+    const itemPlace = document.getElementById("item-place").value.trim();
+    const addItemButton = document.getElementById("add-item");
+
+    // Enable the button only if all fields have values
+    if (itemName) {
+        addItemButton.disabled = false;
+    } 
+    else if (!itemName && itemPrice && itemPlace) {
+        addItemButton.disabled = true;
+    }
+}
 /**
  * @param {MyList} myList 
  * @param {MyListManager} myListManager
@@ -167,11 +219,17 @@ function addButtonOnClick(myList, myListManager) {
                 <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
             </div>
             `
+
     myListManager.onAddItemButtonClicked(myList.getName(), itemName, itemPrice, itemPlace, id);
     setupDeleteItemButton(myList);
     id++;
     //storing the last item id in localStorage in a separate key;
     localStorage.setItem('lastItemId', id);
+
+    //clear the input fields;
+    document.getElementById("item-name").value = '';
+    document.getElementById("item-price").value = '';
+    document.getElementById("item-place").value = '';
 }
 
 /**
@@ -184,13 +242,17 @@ function addButtonOnClick(myList, myListManager) {
 function setupAddItemButton(myList, myListManager) {
     const addItem = document.getElementById("add-item");//get the add button;
 
+    document.getElementById("item-name").addEventListener("input", checkInputs);
+
     //clone the save button to remove the old event listener
     const newAddButton = addItem.cloneNode(true);
     //replace the old button with the new one
     addItem.parentNode.replaceChild(newAddButton, addItem);
+    newAddButton.disabled = true;
 
     newAddButton.addEventListener("click", () => {
         addButtonOnClick(myList, myListManager);
+        newAddButton.disabled = true;
     });
 }
 
