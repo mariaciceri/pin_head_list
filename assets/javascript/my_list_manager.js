@@ -92,7 +92,9 @@ export class MyListManager {
     }
 
     deleteList(listName) {
-
+        delete this.localStorageObj[listName];
+        this._writeToLocalStorage();
+        console.log("Data deleted successfully in localStorage!");
+        alert(`Your list ${listName} has been deleted`);
     }
-
 }

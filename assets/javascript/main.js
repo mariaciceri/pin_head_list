@@ -33,6 +33,9 @@ function main() {
         setupClosePopupButton(createListPopup);
         setupCreateListButton(myListManager);
         setupMyListsButton();
+        setupDeleteListButton()
+        setupDeleteListNoButton();
+        setupDeleteListYesButton(myListManager);
         setupDropdownMenuDivs(lists, myListManager); //must pass an instance of MyList class that correspond to the list we are iterating in 
         //----must add eventListener delete list;
     });
@@ -114,6 +117,34 @@ function setupNewButton(createList) {
     });
 }
 
+function setupDeleteListButton() {
+    const deleteListButton = document.getElementById("delete-list");
+    const deleteListPopup = document.getElementById("delete-list-popup");
+
+    deleteListButton.addEventListener("click", () => {
+        deleteListPopup.style.display = "block";
+    });
+}
+
+function setupDeleteListYesButton(myListManager) {
+    const deleteListYesButton = document.getElementById("delete-list-yes");
+
+    deleteListYesButton.addEventListener("click", () => {
+        const listTitle = document.getElementById("list-title").innerHTML;
+        myListManager.deleteList(listTitle);
+        location.reload();
+    });
+}
+
+function setupDeleteListNoButton() {
+    const deleteListNoButton = document.getElementById("delete-list-no");
+    const deleteListPopup = document.getElementById("delete-list-popup");
+
+    deleteListNoButton.addEventListener("click", () => {
+        deleteListPopup.style.display = "none";
+    });
+}
+
 /**
  * Set up the Close button for the create list popup
  */
@@ -161,9 +192,7 @@ function setupCreateListButton(myListManager) {
     listNameInput.addEventListener("input", checkCreateListInputs);
     
     createButton.addEventListener("click", () => {
-        const existingList = myListManager.getMyList(listNameInput.value);
-        console.log("existingList", existingList);
-        console.log("listNameInput", listNameInput.value);  
+        const existingList = myListManager.getMyList(listNameInput.value); 
         
         if (existingList) {
             tooltip.parentElement.classList.add("show"); // Show the tooltip
