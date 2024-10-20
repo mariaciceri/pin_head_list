@@ -18,19 +18,20 @@ The page is a helper for anyone who wants/needs to remember things they need to 
     ![Page's header](assets/readme-images/header.png)
 
 + Footer
-    + In the footer there is one button with tag "New" indicating that a new list can be created when button clicked;
+    + In the footer there are three buttons with tag "Delete", "New" and "Save" indicating that a list can be deleted, a new one can be created and the edited list must be saved;
 
     ![Page's footer with delete and new button](assets/readme-images/footer.png)
 
 + Popup for list creation
-    + When opening for the first time, the popup will automatically open. If not first time, the user must click on the new button for it to open.
+    + When opening for the first time, the popup will automatically open. If not first time, the user must click on the new button for it to open. A tooltip appears not allowing the user to create a 
 
     ![Create new list popup](assets/readme-images/popup.png)
 
 + Add item layout
-    + After creating a new list, the list name will be displayed on top and the form for creating a new item will show togehter with a add button. The "add" button inserts the newly created item above the input form with a "x" at the end, indicating that the item can be removed. Below this area, there is a "save" button indicating that the list must be saved otherwise will be lost when refrashing the page.
+    + After creating a new list, the list name will be displayed on top and the form for creating a new item will show togehter with a add button that will appear desabled at first. When item is given a name, the "add" button becomes enabled and inserts the newly created item above the input form with a "x" at the end, indicating that the item can be removed, and becomes disabled again.
 
-    ![Test list title, add item form, add and save button](assets/readme-images/body-title-buttons.png)
+    ![Test list title, add item form, add button disabled](assets/readme-images/body-title-buttons.png)
+    ![Add button enabled](assets/readme-images/add-button-enabled.png)
 
 ### Features left to implement
 
@@ -61,10 +62,14 @@ bug: save button was saving the items on the last created list instead of the on
 ## Credits
 ### Content
 
-+ The icon was taken from [Icon Archive](https://www.iconarchive.com/);
++ The icon and favicon was taken from [Icon Archive](https://www.iconarchive.com/);
 + Information on how to use local storage on browser was taken from [thedevlife video](https://www.youtube.com/watch?v=xGvhj-f6IgQ&ab_channel=thedevlife) on YouTube;
++ Delete item icon was taken from [Font Awesome](https://fontawesome.com/);
++ Background picture taken from [Pexels](https://www.pexels.com/);
+
 
 ### Tools
 + [Coolors](https://coolors.co/) was used to create a color pallet;
++ [W3Schools](https://www.w3schools.com/) was used to help creating dropdown menu
 
 
