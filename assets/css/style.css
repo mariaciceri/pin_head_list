@@ -213,7 +213,7 @@ footer button {
 }
 
 .item-price,
-.place {
+.item-place {
     text-align: center;
 }
 
@@ -257,21 +257,48 @@ footer button {
     max-width: 150px;
 }
 
+/* delete list popup */
 .delete-list-popup {
     display: none;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 200px;
     height: 100px;
     background-color: #C75146;
-    z-index: 11;
+    z-index: 99;
     border-radius: 20px;
     border-style: double;
     border-color: #EDDDDD;
+    text-align: center;
 }
 
+.delete-list-popup p {
+    padding: 10px 0;
+}
+
+.delete-list-popup button {
+    background-color: #81171b;
+    color: #EDDDDD;
+    border-style: none;
+    border-radius: 8px;
+    width: 50px;
+    height: 26px;
+    position: relative;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
 
 @media screen and (min-width:600px) {
     .save-list {
