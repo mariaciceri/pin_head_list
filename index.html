@@ -37,15 +37,12 @@
             </div>
             <form class="list-form">
                 <label for="list-name">List Name</label>
-                <br>
                 <div class="tooltip">
                     <input type="text" name="list-name" id="list-name" placeholder="Enter List Name">
                     <span class="tooltip-text" id="tooltip">List name already exists!</span>
-                </div>
-                <br>
-                <label for="category">Category</label>
-                <br>
-                <select name="category" id="category">
+                </div>             
+                <label for="category">Category</label>             
+                <select name="category" id="category" class="category">
                     <option value="Groceries">Groceries</option>
                     <option value="Pets">Pet Shop</option>
                     <option value="Fashion">Fashion</option>
@@ -54,6 +51,7 @@
                     <option value="Other" selected>Other</option>
                 </select>
                 <button type="button" id="create-list-button" class="create-list-button">Create</button>
+                <button type="button" id="create-list-button-disable" class="create-list-button-disable">Create</button>
             </form>
         </aside>
         <aside class="list" id="list">

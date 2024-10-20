@@ -93,14 +93,14 @@ function populateDropdown(lists){
             //if first list being created, empty the element and add the list name;
             if (emptyDropDown) {
                 dropdownMenu.innerHTML = `<div id="${listName}" class="lists-on-dropdown">
-                ${listName}
+                &rarr;${listName}
                 </div>
                 `
             }
             //if there is a list name already, just add more;
             else {
                 dropdownMenu.innerHTML += `<div id="${listName}" class="lists-on-dropdown"">
-                ${listName}
+                &rarr;${listName}
                 </div>
                 `
             }
@@ -180,15 +180,16 @@ function setupClosePopupButton(createList, overlay) {
 function checkCreateListInputs() {
     const listName = document.getElementById("list-name").value.trim();
     const createButton = document.getElementById("create-list-button");
+    const createButtonDisable = document.getElementById("create-list-button-disable")
 
     if (listName) {
         createButton.disabled = false;
-        createButton.style.backgroundColor = "#81171b";
-        createButton.style.boxShadow = "2px 2px 5px #01110A";
+        createButton.style.display = "block";
+        createButtonDisable.style.display = "none";
     } else {
         createButton.disabled = true;
-        createButton.style.backgroundColor = "gray";
-        createButton.style.boxShadow = "none";
+        createButton.style.display = "none";
+        createButtonDisable.style.display = "block";
     }
 }
 
@@ -200,11 +201,12 @@ function setupCreateListButton(myListManager) {
 
     const tooltip = document.getElementById("tooltip");
     const listNameInput = document.getElementById("list-name");
-    const createButton = document.getElementById("create-list-button"); 
+    const createButton = document.getElementById("create-list-button");
+    const createButtonDisable = document.getElementById("create-list-button-disable")
 
     createButton.disabled = true;
-    createButton.style.backgroundColor = "gray";
-    createButton.style.boxShadow = "none";
+    createButton.style.display = "none";
+    createButtonDisable.style.display = "block";
 
     listNameInput.addEventListener("input", checkCreateListInputs);
     

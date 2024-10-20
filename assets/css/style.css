@@ -8,29 +8,41 @@
     margin: 0;
 }
 
+:root {
+    --primary-color: #811735;
+    --secondary-color: #DA58A6;
+    --tertiary-color: #EDDEDE;
+    --quaternary-color: #B33F71;
+    --quinary-color: #01110A;
+    --width: 100%;
+    --max-width: 600px;
+    --border-radius: 8px;
+    --main-font: "Trirong", serif;
+    --border-style: double;
+}
+
 
 body {
-    background: url("../images/blindguard.jpg") center center/cover;
+    background: url("../images/notebook.jpg") center center/cover;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     position: relative;
     font-family: "Fira Sans Condensed", serif;
-    color: #01110A;
-    width: 100%;
-    min-height: 100vh;
+    color: var(--quinary-color);
+    width: var(--width);
     overflow-y: auto;
 }
 
 header {
-    background-image: linear-gradient(#81171b, #C75146, #EA8C55, #EDDEDE);
-    background-color: #C75146;
+    background-image: linear-gradient(var(--primary-color), var(--quaternary-color), var(--secondary-color), var(--tertiary-color));
+    background-color: var(--primary-color);
     position: fixed;
     height: auto;
     display: flex;
-    width: 100%;
-    max-width: 600px;
-    font-family: "Trirong", serif;
+    width: var(--width);
+    max-width: var(--max-width);
+    font-family: var(--main-font);
     font-size: small;
     justify-content: space-between;
     align-items: baseline;
@@ -46,7 +58,7 @@ header img {
 
 header button {
     font-size: large;
-    font-family: "Trirong", serif;
+    font-family: var(--main-font);
     background-color: transparent;
     border-style: none;
 }
@@ -54,9 +66,9 @@ header button {
 main {
     margin: 2rem auto;
     padding: 3rem 0;
-    background-color: #EDDDDD;
-    width: 100%;
-    max-width: 600px;
+    background-color: var(--tertiary-color);
+    width: var(--width);
+    max-width: var(--max-width);
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -66,32 +78,32 @@ main {
 
 
 footer {
-    background-color: #81171b;
+    background-color: var(--primary-color);
     height: 3rem;
-    width: 100%;
-    max-width: 600px;
+    width: var(--width);
+    max-width: var(--max-width);
     position: fixed;
     bottom: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 1em;
-    border-style: double none none none;
-    border-color: #EDDDDD;
+    border-style: var(--border-style) none none none;
+    border-color: var(--tertiary-color);
     align-self: center;
 }
 
 footer button {
-    font-family: "Trirong", serif;
+    font-family: var(--main-font);
     font-size: large;
-    background-color: #01110A;
-    color: #EDDDDD;
+    background-color: var(--quinary-color);
+    color: var(--tertiary-color);
     height: fit-content;
     padding: 0 5px;
-    border-style: double;
-    border-radius: 5px;
+    border-style: var(--border-style);
+    border-radius: var(--border-radius);
     border-width: 3px;
-    border-color: #81171b;
+    border-color: var(--primary-color);
 }
 
 /* style for popup window for creating new list */
@@ -102,11 +114,11 @@ footer button {
     transform: translate(-50%, -50%);
     width: 200px;
     height: 300px;
-    background-color: #C75146;
+    background-color: var(--quaternary-color);
     z-index: 11;
     border-radius: 20px;
-    border-style: double;
-    border-color: #EDDDDD;
+    border-style: var(--border-style);
+    border-color: var(--tertiary-color);
     display: none;
 }
 
@@ -125,34 +137,50 @@ footer button {
 
 .list-form {
     text-align: center;
-    padding: 20% 0;
     line-height: 25px;
-
-}
-
-.list-form select {
-    width: 143px;
+    padding: 2em 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .close-button {
-    background-color: #81171b;
-    color: #EDDDDD;
+    background-color: var(--primary-color);
+    color: var(--tertiary-color);
     border-style: none;
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    box-shadow: 2px 2px 5px #01110A;
+    box-shadow: 2px 2px 5px var(--quinary-color);
     margin-left: auto;
 }
 
 .create-list-button {
-    color: #EDDDDD;
+    color: var(--tertiary-color);
+    background-color: var(--primary-color);
     border-style: none;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
+    box-shadow: 2px 2px 5px var(--quinary-color);
     width: 100px;
     height: 26px;
-    position: relative;
     margin-top: 35px;
+}
+
+.create-list-button-disable {
+    display: none;
+    background-color: gray;
+    color: var(--tertiary-color);
+    border-style: none;
+    border-radius: var(--border-radius);
+    width: 100px;
+    height: 26px;
+    margin-top: 35px;
+}
+
+.tooltip input,
+.category {
+    width: 150px;
+    padding: 0.2em;
 }
 
 /* tooltip for when list name is already taken */
@@ -164,18 +192,16 @@ footer button {
 .tooltip .tooltip-text {
     visibility: hidden;
     width: 150px;
-    background-color: #81171b;
-    color: #EDDDDD;
+    background-color: var(--quinary-color);
+    color: var(--tertiary-color);
     text-align: center;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     padding: 5px;
     position: absolute;
     z-index: 99;
     bottom: 125%;
-    /* Position above the input */
     left: 50%;
     margin-left: -75px;
-    /* Center the tooltip */
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -197,9 +223,9 @@ footer button {
 
 .add-items button {
     padding: 2px;
-    background-color: #EA8C55;
-    border-style: double;
-    border-radius: 8px;
+    background-color: #29c2d6;
+    border-style: var(--border-style);
+    border-radius: var(--border-radius);
     margin-top: 5px;
 }
 
@@ -210,6 +236,7 @@ footer button {
     padding: 0.2em;
     margin-left: 20px;
     margin-right: 10px;
+    word-break: break-word;
 }
 
 .item-price,
@@ -226,6 +253,11 @@ footer button {
 .list-header {
     display: flex;
     margin: 0 10px;
+    flex-wrap: wrap;
+}
+
+.list-header h1 {
+    word-break: break-word;
 }
 
 .list-header h2 {
@@ -249,12 +281,15 @@ footer button {
     right: 10px;
     font-size: medium;
     z-index: 2;
-    background-color: rgba(1, 17, 10, 0.8);
-    color: #EDDEDE;
-    padding: 10px;
+    background-color: rgba(1, 17, 10, 0.9);
+    color: var(--tertiary-color);
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
     cursor: pointer;
     width: max-content;
     max-width: 150px;
+    max-height: 200px;
+    overflow: auto;
 }
 
 /* delete list popup */
@@ -265,12 +300,12 @@ footer button {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 200px;
-    height: 100px;
-    background-color: #C75146;
-    z-index: 99;
+    height: 110px;
+    background-color: var(--quaternary-color);
+    z-index: 11;
     border-radius: 20px;
-    border-style: double;
-    border-color: #EDDDDD;
+    border-style: var(--border-style);
+    border-color: var(--tertiary-color);
     text-align: center;
 }
 
@@ -279,12 +314,14 @@ footer button {
 }
 
 .delete-list-popup button {
-    background-color: #81171b;
-    color: #EDDDDD;
+    background-color: var(--primary-color);
+    color: var(--tertiary-color);
     border-style: none;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
+    box-shadow: 2px 2px 5px var(--quinary-color);
     width: 50px;
     height: 26px;
+    margin: 0 10px;
     position: relative;
 }
 
@@ -294,7 +331,7 @@ footer button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
+    width: var(--width);
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 10;
@@ -303,5 +340,49 @@ footer button {
 @media screen and (min-width:600px) {
     .save-list {
         right: calc((100% - 600px) / 2 + 5px);
+    }
+}
+
+@media screen and (min-width: 992px) {
+
+    /* dropdown menu for created lists */
+    .dropdown button:hover {
+        transform: scale(1.1);
+    }
+
+    .dropdown-content div:hover {
+        color: var(--secondary-color);
+    }
+
+    /* add item button */
+    .add-items button:hover {
+        transform: scale(1.1);
+    }
+
+    /*footer buttons */
+    footer button:hover {
+        transform: translate(0, -2px);
+        background-color: var(--tertiary-color);
+        color: var(--quinary-color);
+    }
+
+    /* yes and no buttons for delete list popup */
+    .delete-list-popup button:hover {
+        transform: translate(0, 1px);
+        background-color: var(--tertiary-color);
+        color: var(--quinary-color);
+    }
+
+    /* create list button */
+    .create-list-button:hover,
+    .close-button:hover {
+        transform: translate(0, 2px);
+        background-color: var(--tertiary-color);
+        color: var(--quinary-color);
+    }
+
+    /*delete item button */
+    .delete-item:hover {
+        transform: scale(1.1);
     }
 }
