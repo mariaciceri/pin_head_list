@@ -14,6 +14,7 @@ function main() {
         const listKeys = Object.keys(lists);
         //get the aside element that contains the create new list form;
         const createListPopup = document.getElementById("create-list");
+        const overlay = document.getElementById("overlay"); 
 
         //check if there are created lists already;
         if (listKeys.length) {
@@ -26,14 +27,15 @@ function main() {
         } else {
             // If no lists, show the popup for creating a new list;
             createListPopup.style.display = "block";
+            overlay.style.display = "block";
         }
 
-        setupNewButton(createListPopup)//create new list button;
-        setupClosePopupButton(createListPopup);//close create list popup button;
+        setupNewButton(createListPopup, overlay)//create new list button;
+        setupClosePopupButton(createListPopup, overlay);//close create list popup button;
         setupCreateListButton(myListManager);//create new list button;
         setupMyListsButton();//show dropdown menu with created lists name;
-        setupDeleteListButton()//when delete list button is clicked, show the popup;
-        setupDeleteListNoButton();//when NO is clicked, close the popup;
+        setupDeleteListButton(overlay)//when delete list button is clicked, show the popup;
+        setupDeleteListNoButton(overlay);//when NO is clicked, close the popup;
         setupDeleteListYesButton(myListManager);//when YES is clicked, delete the list;
         setupDropdownMenuDivs(lists, myListManager);//set up event listeners for the dropdown menu divs;
     });
@@ -110,23 +112,25 @@ function populateDropdown(lists){
  * Set up New button to open the create list popup;
  * @param {HTMLElement} createList
  */
-function setupNewButton(createList) {
+function setupNewButton(createList, overlay) {
     const newButton = document.getElementById("popup"); //New (list) button;
 
     newButton.addEventListener("click", () => {
         createList.style.display = "block";
+        overlay.style.display = "block";
     });
 }
 
 /**
  * Set up the delete list button to show the delete list popup;
  */
-function setupDeleteListButton() {
+function setupDeleteListButton(overlay) {
     const deleteListButton = document.getElementById("delete-list");
     const deleteListPopup = document.getElementById("delete-list-popup");
 
     deleteListButton.addEventListener("click", () => {
         deleteListPopup.style.display = "block";
+        overlay.style.display = "block";
     });
 }
 
@@ -147,24 +151,26 @@ function setupDeleteListYesButton(myListManager) {
 /**
  * Set up the No button to close the delete list popup;
  */
-function setupDeleteListNoButton() {
+function setupDeleteListNoButton(overlay) {
     const deleteListNoButton = document.getElementById("delete-list-no");
     const deleteListPopup = document.getElementById("delete-list-popup");
 
     deleteListNoButton.addEventListener("click", () => {
         deleteListPopup.style.display = "none";
+        overlay.style.display = "none";
     });
 }
 
 /**
  * Set up the Close button for the create list popup;
  */
-function setupClosePopupButton(createList) {
+function setupClosePopupButton(createList, overlay) {
     //close button;
-    const closeCreateList = document.getElementById("close-button");
+    const closeCreateList = document.getElementById("close-button"); 
 
     closeCreateList.addEventListener("click", () => {
         createList.style.display = "none";
+        overlay.style.display = "none";
     });
 }
 
@@ -241,6 +247,7 @@ function checkInputs() {
         addItemButton.disabled = true;
     }
 }
+
 /**
  * Add item to the list and display it;
  * @param {MyList} myList 
@@ -284,7 +291,7 @@ function setupAddItemButton(myList, myListManager) {
     const addItem = document.getElementById("add-item");//get the add button;
     const itemNameInput = document.getElementById("item-name");// get the input field
 
-    itemNameInput.addEventListener("input", checkInputs);
+    document.getElementById("item-name").addEventListener("input", checkInputs);
 
     //clone the save button to remove the old event listener
     const newAddButton = addItem.cloneNode(true);
@@ -296,15 +303,6 @@ function setupAddItemButton(myList, myListManager) {
         addButtonOnClick(myList, myListManager);
         newAddButton.disabled = true;
         itemNameInput.focus();
-    });
-
-    // Check if the pressed key is Enter
-    itemNameInput.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-            addButtonOnClick(myList, myListManager);
-            newAddButton.disabled = true;
-            itemNameInput.focus();
-        }
     });
 }
 
