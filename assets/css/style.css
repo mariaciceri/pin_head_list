@@ -256,11 +256,11 @@ footer button {
     flex-wrap: wrap;
 }
 
-.list-header h1 {
+.list-header h2 {
     word-break: break-all;
 }
 
-.list-header h2 {
+.list-header h3 {
     font-size: small;
 }
 
