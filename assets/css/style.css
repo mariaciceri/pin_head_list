@@ -236,7 +236,7 @@ footer button {
     padding: 0.2em;
     margin-left: 20px;
     margin-right: 10px;
-    word-break: break-word;
+    word-break: break-all;
 }
 
 .item-price,
@@ -257,7 +257,7 @@ footer button {
 }
 
 .list-header h1 {
-    word-break: break-word;
+    word-break: break-all;
 }
 
 .list-header h2 {
@@ -335,12 +335,6 @@ footer button {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 10;
-}
-
-@media screen and (min-width:600px) {
-    .save-list {
-        right: calc((100% - 600px) / 2 + 5px);
-    }
 }
 
 @media screen and (min-width: 992px) {
