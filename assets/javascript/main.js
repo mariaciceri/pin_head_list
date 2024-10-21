@@ -1,5 +1,4 @@
 
-import { MyList } from "./my_list.js";
 import { MyListManager } from "./my_list_manager.js";
 
 
@@ -30,11 +29,11 @@ function main() {
             overlay.style.display = "block";
         }
 
-        setupNewButton(createListPopup, overlay)//create new list button;
+        setupNewButton(createListPopup, overlay);//create new list button;
         setupClosePopupButton(createListPopup, overlay);//close create list popup button;
         setupCreateListButton(myListManager);//create new list button;
         setupMyListsButton();//show dropdown menu with created lists name;
-        setupDeleteListButton(overlay)//when delete list button is clicked, show the popup;
+        setupDeleteListButton(overlay);//when delete list button is clicked, show the popup;
         setupDeleteListNoButton(overlay);//when NO is clicked, close the popup;
         setupDeleteListYesButton(myListManager);//when YES is clicked, delete the list;
         setupDropdownMenuDivs(lists, myListManager);//set up event listeners for the dropdown menu divs;
@@ -82,7 +81,7 @@ function populateDropdown(lists){
     for (const listName in lists) {
         //aside element with list title and add item form inside;
         const list = document.getElementById("list"); 
-        const listTitle = document.getElementById("list-title")
+        const listTitle = document.getElementById("list-title");
         const dropdownMenu = document.getElementsByClassName("dropdown-content")[0];
         const emptyDropDown = document.getElementById("no-list-to-display");
 
@@ -95,7 +94,7 @@ function populateDropdown(lists){
                 dropdownMenu.innerHTML = `<div id="${listName}" class="lists-on-dropdown">
                 &rarr;${listName}
                 </div>
-                `
+                `;
             }
             //if there is a list name already, just add more;
             else {
@@ -106,7 +105,7 @@ function populateDropdown(lists){
             }
         }
     }
-};
+}
 
 /**
  * Set up New button to open the create list popup;
@@ -180,7 +179,7 @@ function setupClosePopupButton(createList, overlay) {
 function checkCreateListInputs() {
     const listName = document.getElementById("list-name").value.trim();
     const createButton = document.getElementById("create-list-button");
-    const createButtonDisable = document.getElementById("create-list-button-disable")
+    const createButtonDisable = document.getElementById("create-list-button-disable");
 
     if (listName) {
         createButton.disabled = false;
@@ -202,7 +201,7 @@ function setupCreateListButton(myListManager) {
     const tooltip = document.getElementById("tooltip");
     const listNameInput = document.getElementById("list-name");
     const createButton = document.getElementById("create-list-button");
-    const createButtonDisable = document.getElementById("create-list-button-disable")
+    const createButtonDisable = document.getElementById("create-list-button-disable");
 
     createButton.disabled = true;
     createButton.style.display = "none";
@@ -292,7 +291,7 @@ function addButtonOnClick(myList, myListManager) {
                 <div class="item-price">${itemPlace}</div>
                 <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
             </div>
-            `
+            `;
 
     myListManager.onAddItemButtonClicked(myList.getName(), itemName, itemPrice, itemPlace, id);
     setupDeleteItemButton(myList);
@@ -402,12 +401,12 @@ function setupMyListsButton() {
 
     myListsButton.addEventListener("click", () => {
         dropdownMenu.style.display = "block";
-    })
+    });
 
     body.addEventListener("click", (event) => {
         if(event.target !== myListsButton && !myListsButton.contains(event.target)) 
         {
             dropdownMenu.style.display = "none";
         }
-    })
+    });
 }

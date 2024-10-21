@@ -1,12 +1,5 @@
-//manage items on the list:  delete
-
-import { MyItem } from "./my_item.js";
-import { MyListManager } from "./my_list_manager.js"
 
 export class MyList {
-    /**
-     * @param {MyListManager} myListManager 
-     */
     constructor() {
         this.storedItems = {};
         this.category = "Other";

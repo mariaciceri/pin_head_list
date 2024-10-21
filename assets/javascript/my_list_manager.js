@@ -40,7 +40,7 @@ export class MyListManager {
         this.localStorageObj[listName] = {
             storedItems: {},
             category: category
-        }
+        };
         this._writeToLocalStorage();
     }
 
