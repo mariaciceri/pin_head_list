@@ -1,33 +1,72 @@
 //manage items on the list:  delete
 
 import { MyItem } from "./my_item.js";
-import { ListManager } from "./my_list_manager.js"
+import { MyListManager } from "./my_list_manager.js"
 
 export class MyList {
+    /**
+     * @param {MyListManager} myListManager 
+     */
     constructor() {
         this.storedItems = {};
-        this.newList = new ListManager();
+        this.category = "Other";
+        this.name = "";
     }
 
-    onAddButtonClicked(itemName, itemPrice, itemPlace, id) {
-        const newItem = new MyItem(itemName, itemPrice, itemPlace);
-        this.storedItems[id] = newItem; 
+    /**
+     * @returns {string}
+     */
+    getCategory() {
+        return this.category;
+    }
+    
+    /**
+     * @returns {string}
+     */
+    setCategory(category) {
+        this.category = category;
     }
 
-    onSaveButtonClicked (listName) {
-        this.newList._onSaveButtonClicked(listName, this.storedItems);
+    /**
+     * @returns {string}
+     */
+    getName() {
+        return this.name;
     }
 
-    retrieveListByName(listName) {
-        this.storedItems = this.newList._retrieveListByName(listName);
+    /**
+     * @returns {string}
+     */
+    setName(name) {
+        this.name = name;
+    }
+
+    /**
+     * @param {string} id
+     * @param {MyItem} item 
+     */
+    addItem(id, item) {
+        this.storedItems[id] = item;
+    }
+
+    /**
+     * @returns { object }
+     */
+    getItem(itemId) {
+        return this.storedItems[itemId];
+    }
+
+    /**
+     * @returns { object }
+     */
+    getStoredItems() {
         return this.storedItems;
     }
 
-    // not deleting anymore
+    /**
+     * @param {string} itemId 
+     */
     deleteItemFromStoredItems(itemId) {
-        // const shoppingLists = JSON.parse(localStorage.getItem('shoppingLists'));
-        // this.storedItems = shoppingLists[listName].storedItems;
         delete this.storedItems[itemId];
-    }
-       
+    } 
 }
