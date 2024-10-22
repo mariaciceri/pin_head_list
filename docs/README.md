@@ -152,6 +152,7 @@ git clone https://github.com/mariaciceri/pin_head_list
 + Information on how to use local storage on browser was taken from [thedevlife video](https://www.youtube.com/watch?v=xGvhj-f6IgQ&ab_channel=thedevlife) on YouTube;
 + Delete item icon was taken from [Font Awesome](https://fontawesome.com/);
 + Background picture taken from [Pexels](https://www.pexels.com/);
++ Info button idea was taken from [Codepen](https://codepen.io/EasyBoarder/pen/LZzzjy)
 
 
 ### Tools
