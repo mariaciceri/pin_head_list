@@ -50,7 +50,7 @@
                         <option value="Other" selected>Other</option>
                     </select>
                     <button type="button" id="create-list-button" class="create-list-button">Create</button>
-                    <button type="button" id="create-list-button-disable" class="create-list-button-disable">Create</button>
+                    <button type="button" id="create-list-button-disabled" class="create-list-button-disabled">Create</button>
                 </form>
             </aside>
             <aside class="list" id="list">
@@ -71,7 +71,8 @@
                 <div>
                     <form id="add-items" class="add-items">
                         <input type="text" name="name" id="item-name" placeholder="Item Name">
-                        <input type="number" name="price" id="item-price" placeholder="Item Price">
+                        <input type="number" name="price" id="item-price" min="0.01" step="0.01" placeholder="Item Price">
+                        <span class="info-on-price"><em>Price must be positive</em></span>
                         <input type="text" name="place" id="item-place" placeholder="Where to buy">
                         <button type="button" id="add-item" class="add-item">Add</button>
                         <button type="button" id="add-item-disabled" class="add-item-disabled">Add</button>

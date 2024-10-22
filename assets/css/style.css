@@ -186,7 +186,7 @@ footer button {
     cursor: var(--primary-cursor);
 }
 
-.create-list-button-disable {
+.create-list-button-disabled {
     display: none;
     background-color: gray;
     color: var(--tertiary-color);
@@ -257,6 +257,25 @@ footer button {
     border-style: var(--border-style);
     border-radius: var(--border-radius);
     margin-top: 5px;
+}
+
+.info-on-price {
+    display: none;
+    font-size: 12px;
+    position: absolute;
+    left: 45%;
+    background-color: var(--quinary-color);
+    color: var(--tertiary-color);
+    border-radius: var(--border-radius);
+    padding: 3px;
+    width: max-content;
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+.add-items.show .info-on-price {
+    display: block;
+    opacity: 1;
 }
 
 /* items display */

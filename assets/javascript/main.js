@@ -1,4 +1,5 @@
 
+import { MyList } from "./my_list.js";
 import { MyListManager } from "./my_list_manager.js";
 
 /**
@@ -185,14 +186,14 @@ function setupClosePopupButton(createList, overlay) {
 function checkCreateListInputs() {
     const listName = document.getElementById("list-name").value.trim();
     const createButton = document.getElementById("create-list-button");
-    const createButtonDisable = document.getElementById("create-list-button-disable");
+    const createButtonDisabled = document.getElementById("create-list-button-disabled");
 
     if (listName) {
         createButton.style.display = "block";
-        createButtonDisable.style.display = "none";
+        createButtonDisabled.style.display = "none";
     } else {
         createButton.style.display = "none";
-        createButtonDisable.style.display = "block";
+        createButtonDisabled.style.display = "block";
     }
 }
 
@@ -205,11 +206,10 @@ function setupCreateListButton(myListManager) {
     const tooltip = document.getElementById("tooltip");
     const listNameInput = document.getElementById("list-name");
     const createButton = document.getElementById("create-list-button");
-    const createButtonDisable = document.getElementById("create-list-button-disable");
-
+    const createButtonDisabled = document.getElementById("create-list-button-disabled");
 
     createButton.style.display = "none";
-    createButtonDisable.style.display = "block";
+    createButtonDisabled.style.display = "block";
 
     listNameInput.addEventListener("input", checkCreateListInputs);
     
@@ -217,9 +217,7 @@ function setupCreateListButton(myListManager) {
         const existingList = myListManager.getMyList(listNameInput.value); 
         
         if (existingList) {
-            // Show the tooltip
             tooltip.parentElement.classList.add("show"); 
-            // Hide after 3 seconds
             setTimeout(() => {
                 tooltip.parentElement.classList.remove("show"); 
             }, 3000);
@@ -239,14 +237,27 @@ function setupCreateListButton(myListManager) {
  */
 function checkInputs() {
     const itemName = document.getElementById("item-name").value.trim();
+    const itemPrice = document.getElementById("item-price").value
     const addItemButton = document.getElementById("add-item");
     const addItemButtonDisabled = document.getElementById("add-item-disabled");
-
-    // Enable the button if item name has a value
-    if (itemName) {
+    const priceTooltip = document.getElementById("add-item");
+    
+    // Enable the button if item name has a value and the item price isn't negative;
+    if (itemName && (itemPrice > 0 || itemPrice === "")) {
         addItemButton.style.display = "block";
         addItemButtonDisabled.style.display = "none";
-    } else {
+    } 
+    //show the tooltip if the price is negative and dont let user add the item;
+    else if (itemPrice < 0) {
+        priceTooltip.parentElement.classList.add("show");
+
+        setTimeout(() => {
+            priceTooltip.parentElement.classList.remove("show");
+        }, 3000);
+        addItemButton.style.display = "none";
+        addItemButtonDisabled.style.display = "block";
+    }
+    else {
         addItemButton.style.display = "none";
         addItemButtonDisabled.style.display = "block";
     }
@@ -254,28 +265,44 @@ function checkInputs() {
 
 /**
  * Set up the event listener for the add button;
+ * @param { HTMLElement } newAddButton 
+ * @param { MyList } myList 
+ * @param { MyListManager } myListManager 
+ */
+function addButtonEventListener(newAddButton, myList, myListManager) {
+    const addButtonDisabled = document.getElementById("add-item-disabled");
+    const itemNameInput = document.getElementById("item-name");
+
+    addButtonDisabled.style.display = "none";
+    addButtonOnClick(myList, myListManager);
+    myListManager.saveToStorage(myList);
+    itemNameInput.focus();
+    newAddButton.style.display = "none";
+    addButtonDisabled.style.display = "block";
+}
+
+/**
+ * Clone add button to remove the old event listener;
+ * Check if the input fields are not empty;
+ * Add event listener to the new button;
  * @param {MyList} myList
  * @param {MyListManager} myListManager
  */
 function setupAddItemButton(myList, myListManager) {
     const addItem = document.getElementById("add-item");//get the add button;
-    const itemNameInput = document.getElementById("item-name");// get the input field
-    const addButtonDisabled = document.getElementById("add-item-disabled");
+    const itemNameInput = document.getElementById("item-name");// get the input field;
+    const itemPriceInput = document.getElementById("item-price");// get the input field;
 
     itemNameInput.addEventListener("input", checkInputs);
+    itemPriceInput.addEventListener("input", checkInputs);
 
-    //clone the save button to remove the old event listener
+    //clone the save button to remove the old event listener;
     const newAddButton = addItem.cloneNode(true);
-    //replace the old button with the new one
+    //replace the old button with the new one;
     addItem.parentNode.replaceChild(newAddButton, addItem);
 
     newAddButton.addEventListener("click", () => {
-        addButtonDisabled.style.display = "none";
-        addButtonOnClick(myList, myListManager);
-        myListManager.saveToStorage(myList);
-        itemNameInput.focus();
-        newAddButton.style.display = "none";
-        addButtonDisabled.style.display = "block";
+        addButtonEventListener(newAddButton, myList, myListManager);
     });
 }
 
