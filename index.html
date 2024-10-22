@@ -47,7 +47,6 @@
                         <option value="Pets">Pet Shop</option>
                         <option value="Fashion">Fashion</option>
                         <option value="Pharmacy">Pharmacy</option>
-                        <option value="To-do">To-do</option>
                         <option value="Other" selected>Other</option>
                     </select>
                     <button type="button" id="create-list-button" class="create-list-button">Create</button>
@@ -59,7 +58,15 @@
                     <h2 id="list-title"></h2>
                     <h3 id="list-category"></h3>
                 </div>
+                <div class="list-items-header">
+                    <div class="item-name">Item</div>
+                    <div class="item-price">Price</div>
+                    <div class="item-place">Where to buy</div>
+                </div>
+                <hr class="list-separator">
                 <div class="display-items" id="display-items">
+                    <div class="list-items">
+                    </div>
                 </div>
                 <div>
                     <form id="add-items" class="add-items">

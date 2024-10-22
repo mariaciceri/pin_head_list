@@ -22,9 +22,9 @@
     --primary-cursor: pointer;
 }
 
-
 body {
     background: url("../images/notebook.jpg") center center/cover;
+    background-attachment: fixed;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -259,27 +259,34 @@ footer button {
     margin-top: 5px;
 }
 
-
-
 /* items display */
 .list-items {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 0.3fr;
+    grid-template-columns: 1fr 1fr 1fr 0.2fr;
     padding: 0.2em;
     margin-left: 20px;
     margin-right: 10px;
     word-break: break-all;
 }
 
+.item-name,
 .item-price,
 .item-place {
     text-align: center;
+}
+
+.list-items-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 0.2fr;
+    margin: 10px;
+    font-weight: 700;
 }
 
 /* the whole list container */
 .list {
     display: none;
     height: fit-content;
+    width: 100%;
 }
 
 .list-header {
@@ -294,6 +301,12 @@ footer button {
 
 .list-header h3 {
     font-size: small;
+}
+
+.list-separator {
+    border-color: var(--quinary-color);
+    border-bottom-color: var(--primary-color);
+    margin: 10px;
 }
 
 /* delete item button */
