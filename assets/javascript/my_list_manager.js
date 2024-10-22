@@ -100,7 +100,6 @@ export class MyListManager {
         };
 
         this._writeToLocalStorage();
-        alert(`Your list ${myList.getName() } has been saved`);
     }
 
     /**

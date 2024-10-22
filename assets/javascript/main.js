@@ -1,11 +1,16 @@
 
 import { MyListManager } from "./my_list_manager.js";
 
-
+/**
+ * Main function that sets up the event listeners for the page.
+ */
 function main() {
     let myListManager = new MyListManager();
     
-    // Set up event listeners for when the page is reloaded
+    /**
+     * Set up event listeners for when the page is reloaded
+     * or when the DOM is fully loaded.
+     */
     document.addEventListener("DOMContentLoaded", () => {
         myListManager.loadFromStorage();
         const lists = myListManager.getMyLists();
@@ -19,9 +24,8 @@ function main() {
         if (listKeys.length) {
             const lastListName = listKeys[listKeys.length - 1];
             const lastList = myListManager.getMyList(lastListName);
-            showList(lastList);
+            showList(lastList, myListManager);
             setupAddItemButton(lastList, myListManager); // Setup add button for the last list;
-            setupSaveButton(lastList, myListManager); // Setup save button for the last list;
             populateDropdown(lists);
         } else {
             // If no lists, show the popup for creating a new list;
@@ -40,7 +44,9 @@ function main() {
     });
 }
 
-// App entry point
+/**
+ * App entry point
+ */ 
 main();
 
 /**
@@ -48,7 +54,7 @@ main();
  * each item in the list.
  * @param {MyList} myList 
  */
-function showList(myList) {
+function showList(myList, myListManager) {
     const listTitle = document.getElementById("list-title");
     const listCategory = document.getElementById("list-category");
     const listOfItems = document.getElementById("display-items");
@@ -68,7 +74,7 @@ function showList(myList) {
         </div>`;
     }
     
-    setupDeleteItemButton(myList); // Setup delete buttons for each item;
+    setupDeleteItemButton(myList, myListManager); // Setup delete buttons for each item;
 }
 
 
@@ -266,6 +272,7 @@ function setupAddItemButton(myList, myListManager) {
     newAddButton.addEventListener("click", () => {
         addButtonDisabled.style.display = "none";
         addButtonOnClick(myList, myListManager);
+        myListManager.onSaveButtonClicked(myList);
         itemNameInput.focus();
         newAddButton.style.display = "none";
         addButtonDisabled.style.display = "block";
@@ -295,7 +302,7 @@ function addButtonOnClick(myList, myListManager) {
             `;
 
     myListManager.onAddItemButtonClicked(myList.getName(), itemName, itemPrice, itemPlace, id);
-    setupDeleteItemButton(myList);
+    setupDeleteItemButton(myList, myListManager);
     id++;
     //storing the last item id in localStorage in a separate key;
     localStorage.setItem('lastItemId', id);
@@ -308,29 +315,10 @@ function addButtonOnClick(myList, myListManager) {
 
 
 /**
- * Set up the event listener for the save button;
- * @param {MyList} myList
- * @param {MyListManager} myListManager
- */
-function setupSaveButton(myList, myListManager) {
-    //save button;
-    const saveListButton = document.getElementById("save-list");
-    //clone the save button to remove the old event listener
-    const newSaveButton = saveListButton.cloneNode(true);
-    //replace the old button with the new one
-    saveListButton.parentNode.replaceChild(newSaveButton, saveListButton);
-    
-    newSaveButton.addEventListener("click", () => {
-        myListManager.onSaveButtonClicked(myList);
-    });
-}
-
-
-/**
  * Delete item from the HTML and from the stored items;
  * @param {MyList} newList
  */
-function setupDeleteItemButton(newList) {
+function setupDeleteItemButton(newList, myListManager) {
     let deleteButtons = document.getElementsByClassName("delete-item");
 
     for (let button of deleteButtons) {
@@ -339,6 +327,7 @@ function setupDeleteItemButton(newList) {
             const itemId = itemDiv.id;
             itemDiv.remove();
             newList.deleteItemFromStoredItems(itemId);
+            myListManager.onSaveButtonClicked(newList);
         });
     }
 }
@@ -381,10 +370,9 @@ function setupDropdownMenuDivs(lists, myListManager) {
                         <div class="delete-item"><i class="fa-solid fa-circle-xmark"></i></div>
                     </div>`;
 
-                    setupDeleteItemButton(selectedList);//must pass an instance of MyList class that correspond to the list we are iterating in
+                    setupDeleteItemButton(selectedList, myListManager);//must pass an instance of MyList class that correspond to the list we are iterating in
                 } 
 
-                setupSaveButton(selectedList, myListManager);// Re-map the save button for the selected list
                 setupAddItemButton(selectedList, myListManager);// not mapping the add button anymore for the previous lists;
             });
             list.hasClickListener = true;
