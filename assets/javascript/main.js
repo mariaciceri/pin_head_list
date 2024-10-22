@@ -272,7 +272,7 @@ function setupAddItemButton(myList, myListManager) {
     newAddButton.addEventListener("click", () => {
         addButtonDisabled.style.display = "none";
         addButtonOnClick(myList, myListManager);
-        myListManager.onSaveButtonClicked(myList);
+        myListManager.saveToStorage(myList);
         itemNameInput.focus();
         newAddButton.style.display = "none";
         addButtonDisabled.style.display = "block";
@@ -327,7 +327,7 @@ function setupDeleteItemButton(newList, myListManager) {
             const itemId = itemDiv.id;
             itemDiv.remove();
             newList.deleteItemFromStoredItems(itemId);
-            myListManager.onSaveButtonClicked(newList);
+            myListManager.saveToStorage(newList);
         });
     }
 }

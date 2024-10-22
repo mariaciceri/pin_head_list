@@ -93,7 +93,7 @@ export class MyListManager {
      * Update existing list in localStorage;
      * @param {MyList} myList
      */
-    onSaveButtonClicked(myList) {
+    saveToStorage(myList) {
         this.localStorageObj[myList.getName()] = {
             storedItems: myList.getStoredItems(),
             category: myList.getCategory() 
