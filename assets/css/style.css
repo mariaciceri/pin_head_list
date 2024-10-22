@@ -19,6 +19,7 @@
     --border-radius: 8px;
     --main-font: "Trirong", serif;
     --border-style: double;
+    --primary-cursor: pointer;
 }
 
 
@@ -62,6 +63,7 @@ header button {
     font-family: var(--main-font);
     background-color: transparent;
     border-style: none;
+    cursor: var(--primary-cursor);
 }
 
 /* main content styles */
@@ -106,6 +108,7 @@ footer button {
     border-radius: var(--border-radius);
     border-width: 3px;
     border-color: var(--primary-color);
+    cursor: var(--primary-cursor);
 }
 
 /* style for popup window for creating new list */
@@ -156,6 +159,7 @@ footer button {
     border-radius: 50%;
     box-shadow: 2px 2px 5px var(--quinary-color);
     margin-left: auto;
+    cursor: var(--primary-cursor);
 }
 
 .info-on-close {
@@ -179,6 +183,7 @@ footer button {
     width: 100px;
     height: 26px;
     margin-top: 35px;
+    cursor: var(--primary-cursor);
 }
 
 .create-list-button-disable {
@@ -243,6 +248,7 @@ footer button {
     border-style: var(--border-style);
     border-radius: var(--border-radius);
     margin-top: 5px;
+    cursor: var(--primary-cursor);
 }
 
 .add-item-disabled {
@@ -293,6 +299,7 @@ footer button {
 /* delete item button */
 .delete-item {
     text-align: end;
+    cursor: var(--primary-cursor);
 }
 
 /* dropdown menu for created lists */
@@ -349,6 +356,7 @@ footer button {
     height: 26px;
     margin: 0 10px;
     position: relative;
+    cursor: var(--primary-cursor);
 }
 
 .overlay {
@@ -394,7 +402,7 @@ footer button {
     }
 
     /* create list button */
-    .create-list-button:hover, 
+    .create-list-button:hover,
     .close-button:hover {
         display: block;
         transform: translate(0, 2px);
@@ -402,7 +410,7 @@ footer button {
         color: var(--quinary-color);
     }
 
-    .close-button:hover + .info-on-close {
+    .close-button:hover+.info-on-close {
         display: block;
     }
 
