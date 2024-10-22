@@ -1,6 +1,6 @@
 # PIN HEAD LISTS
 
-Pin Head Lists is a place for anyone to create various lists and store them locally. It offers an easy way to list items that you need to buy and where to buy them, as well as price for the item. Alternatively, you can use to list tasks that need to be tracked of. 
+Pin Head Lists is a place for anyone to create various lists and store them locally. It offers an easy way to list items that you need to buy and where to buy them, as well as price for the item.
 
 The page is fully responsive and allow the user to create new lists, add new items, delete items, delete lists all together and navigate through created lists.
 
@@ -8,7 +8,7 @@ The page is fully responsive and allow the user to create new lists, add new ite
 
 ## Features
 
-The page is a helper for anyone who wants/needs to remember things they need to buy, where to buy them, and the price at the moment. It works as a task manager too as the price and where to buy fields are not mandatory, so the user can simply add what they need to do and delete them as they complete the task.
+The page is a helper for anyone who wants/needs to remember things they need to buy, where to buy them, and the price at the moment. Price and where to buy are not required to add an item to the list but name is.
 
 ### Existing features
 
@@ -18,7 +18,7 @@ The page is a helper for anyone who wants/needs to remember things they need to 
     ![Page's header](images/header.png)
 
 + Footer
-    + In the footer there are three buttons with tag "Delete", "New" and "Save" indicating that a list can be deleted, a new one can be created and the edited list must be saved;
+    + In the footer there are three buttons with tag "Delete" and "New" indicating that a list can be deleted, a new one can be created and the edited list must be saved;
 
     ![Page's footer with delete and new button](images/footer.png)
 
@@ -34,7 +34,7 @@ The page is a helper for anyone who wants/needs to remember things they need to 
     ![Delete list confirmation popup window](images/delete-list-popup.png)
 
 + Add item layout
-    + After creating a new list, the list name will be displayed on top with the category on the top-right side of it, and the form for creating a new item will show togehter with a add button that will appear desabled at first. When something else than space is in the input field for name, the "add" button becomes enabled and, if clicked, inserts the newly created item above the input form with a "x" at the end, indicating that the item can be removed, and then the add button becomes disabled again.
+    + After creating a new list, the list name will be displayed on top with the category on the top-right side of it, and the form for creating a new item will show togehter with a add button that will appear disabled at first. When something else than space is in the input field for name, the "add" button becomes enabled and, if clicked, inserts the newly created item above the input form with a "x" at the end, indicating that the item can be removed, and then the add button becomes disabled again.
 
     ![Test list title, add item form, add button disabled](images/add-button-disabled.png)
     ![Add button enabled](images/add-button-enabled.png)
@@ -74,8 +74,6 @@ The page is a helper for anyone who wants/needs to remember things they need to 
         + Display an alert saying that the list was deleted;
     + Delete confirmation popup No button:
         + Closes the popup window showing whatever is behind;
-    + Save button:
-        + Display an alert saying that the list was saved;
     + My Lists button:
         + Show dropdown menu with all list names created so far;
     + Add button:
@@ -126,9 +124,6 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 
 + Bug: when new list created, all the event listeners that were added after a list was created, were added again, this way creating duplicates when adding items, saving lists and so on;
     + Fix: reload the page everytime a new list is created, ensuring that the event listeners are added only once.
-
-+ Bug: save button was saving the items on the last created list instead of the one the user was editing;
-    + Fix: remapping the save button each time a list is retrieved by cloning the button and adding the event listener again.
 
 
 ## Deployment
