@@ -182,11 +182,9 @@ function checkCreateListInputs() {
     const createButtonDisable = document.getElementById("create-list-button-disable");
 
     if (listName) {
-        createButton.disabled = false;
         createButton.style.display = "block";
         createButtonDisable.style.display = "none";
     } else {
-        createButton.disabled = true;
         createButton.style.display = "none";
         createButtonDisable.style.display = "block";
     }
@@ -203,7 +201,7 @@ function setupCreateListButton(myListManager) {
     const createButton = document.getElementById("create-list-button");
     const createButtonDisable = document.getElementById("create-list-button-disable");
 
-    createButton.disabled = true;
+
     createButton.style.display = "none";
     createButtonDisable.style.display = "block";
 
@@ -221,7 +219,6 @@ function setupCreateListButton(myListManager) {
             }, 3000);
         } 
         else {
-            createButton.disabled = true;
             const listName = document.getElementById("list-name").value;
             const category = document.getElementById("category").value;
             myListManager.addToStorage(listName, category);
@@ -237,12 +234,15 @@ function setupCreateListButton(myListManager) {
 function checkInputs() {
     const itemName = document.getElementById("item-name").value.trim();
     const addItemButton = document.getElementById("add-item");
+    const addItemButtonDisabled = document.getElementById("add-item-disabled");
 
     // Enable the button if item name has a value
     if (itemName) {
-        addItemButton.disabled = false;
+        addItemButton.style.display = "block";
+        addItemButtonDisabled.style.display = "none";
     } else {
-        addItemButton.disabled = true; // Disable if item name is empty
+        addItemButton.style.display = "none";
+        addItemButtonDisabled.style.display = "block";
     }
 }
 
@@ -254,6 +254,7 @@ function checkInputs() {
 function setupAddItemButton(myList, myListManager) {
     const addItem = document.getElementById("add-item");//get the add button;
     const itemNameInput = document.getElementById("item-name");// get the input field
+    const addButtonDisabled = document.getElementById("add-item-disabled");
 
     itemNameInput.addEventListener("input", checkInputs);
 
@@ -262,12 +263,12 @@ function setupAddItemButton(myList, myListManager) {
     //replace the old button with the new one
     addItem.parentNode.replaceChild(newAddButton, addItem);
 
-    newAddButton.disabled = true;
-
     newAddButton.addEventListener("click", () => {
-        newAddButton.disabled = true;
+        addButtonDisabled.style.display = "none";
         addButtonOnClick(myList, myListManager);
         itemNameInput.focus();
+        newAddButton.style.display = "none";
+        addButtonDisabled.style.display = "block";
     });
 }
 

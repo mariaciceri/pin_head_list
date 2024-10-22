@@ -221,13 +221,24 @@ footer button {
     padding: 0.2em;
 }
 
-.add-items button {
+.add-item {
+    display: none;
     padding: 2px;
     background-color: #29c2d6;
     border-style: var(--border-style);
     border-radius: var(--border-radius);
     margin-top: 5px;
 }
+
+.add-item-disabled {
+    padding: 2px;
+    background-color: gray;
+    border-style: var(--border-style);
+    border-radius: var(--border-radius);
+    margin-top: 5px;
+}
+
+
 
 /* items display */
 .list-items {
@@ -349,7 +360,7 @@ footer button {
     }
 
     /* add item button */
-    .add-items button:hover {
+    .add-item:hover {
         transform: scale(1.1);
     }
 
