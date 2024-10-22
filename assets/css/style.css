@@ -34,6 +34,7 @@ body {
     overflow-y: auto;
 }
 
+/* header elements styles */
 header {
     background-image: linear-gradient(var(--primary-color), var(--quaternary-color), var(--secondary-color), var(--tertiary-color));
     background-color: var(--primary-color);
@@ -63,6 +64,7 @@ header button {
     border-style: none;
 }
 
+/* main content styles */
 main {
     margin: 2rem auto;
     padding: 3rem 0;
@@ -76,7 +78,7 @@ main {
     flex-grow: 1;
 }
 
-
+/* footer styles */
 footer {
     background-color: var(--primary-color);
     height: 3rem;
@@ -133,6 +135,7 @@ footer button {
 .header {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .list-form {
@@ -153,6 +156,18 @@ footer button {
     border-radius: 50%;
     box-shadow: 2px 2px 5px var(--quinary-color);
     margin-left: auto;
+}
+
+.info-on-close {
+    display: none;
+    font-size: 12px;
+    position: absolute;
+    top: 25px;
+    left: 50px;
+    background-color: var(--tertiary-color);
+    border-radius: var(--border-radius);
+    padding: 3px;
+    width: max-content;
 }
 
 .create-list-button {
@@ -344,7 +359,7 @@ footer button {
     transform: translate(-50%, -50%);
     width: var(--width);
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: rgb(0, 0, 0, 0.8);
     z-index: 10;
 }
 
@@ -379,11 +394,16 @@ footer button {
     }
 
     /* create list button */
-    .create-list-button:hover,
+    .create-list-button:hover, 
     .close-button:hover {
+        display: block;
         transform: translate(0, 2px);
         background-color: var(--tertiary-color);
         color: var(--quinary-color);
+    }
+
+    .close-button:hover + .info-on-close {
+        display: block;
     }
 
     /*delete item button */
