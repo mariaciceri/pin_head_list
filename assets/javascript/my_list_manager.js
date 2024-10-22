@@ -100,7 +100,6 @@ export class MyListManager {
         };
 
         this._writeToLocalStorage();
-        console.log("Data saved successfully in localStorage!");
         alert(`Your list ${myList.getName() } has been saved`);
     }
 
@@ -111,7 +110,6 @@ export class MyListManager {
     deleteList(listName) {
         delete this.localStorageObj[listName];
         this._writeToLocalStorage();
-        console.log("Data deleted successfully in localStorage!");
         alert(`Your list ${listName} has been deleted`);
     }
 }

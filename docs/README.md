@@ -4,7 +4,7 @@ Pin Head Lists is a place for anyone to create various lists and store them loca
 
 The page is fully responsive and allow the user to create new lists, add new items, delete items, delete lists all together and navigate through created lists.
 
-![Am I responsive image](assets/readme-images/am-i-responsive.png)
+![Am I responsive image](images/am-i-responsive.png)
 
 ## Features
 
@@ -15,34 +15,34 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 + Logo and Header
     + The logo with the page name is located in the top left corner, easily visible when first opening the page. The "My Lists" button is also located in the header opposite to the logo/name and it is easy to now that there is the place were the user will navigate through lists. The header is always visible.
 
-    ![Page's header](assets/readme-images/header.png)
+    ![Page's header](images/header.png)
 
 + Footer
     + In the footer there are three buttons with tag "Delete", "New" and "Save" indicating that a list can be deleted, a new one can be created and the edited list must be saved;
 
-    ![Page's footer with delete and new button](assets/readme-images/footer.png)
+    ![Page's footer with delete and new button](images/footer.png)
 
 + Popup for list creation
     + When opening for the first time, the popup will automatically open. If not first time, the user must click on the new button for it to open. A tooltip appears not allowing the user to create a list with a name that already exists;
 
-    ![Create new list popup](assets/readme-images/create-list-popup.png)
-    ![List name already taken](assets/readme-images/list-name-taken-tooltip.png)
+    ![Create new list popup](images/create-list-popup.png)
+    ![List name already taken](images/list-name-taken-tooltip.png)
 
 + Popup for delete list
     + When the user click on the delete button, a popup window will prompt the user to confirm the deletion;
 
-    ![Delete list confirmation popup window](assets/readme-images/delete-list-popup.png)
+    ![Delete list confirmation popup window](images/delete-list-popup.png)
 
 + Add item layout
     + After creating a new list, the list name will be displayed on top with the category on the top-right side of it, and the form for creating a new item will show togehter with a add button that will appear desabled at first. When something else than space is in the input field for name, the "add" button becomes enabled and, if clicked, inserts the newly created item above the input form with a "x" at the end, indicating that the item can be removed, and then the add button becomes disabled again.
 
-    ![Test list title, add item form, add button disabled](assets/readme-images/add-button-disabled.png)
-    ![Add button enabled](assets/readme-images/add-button-enabled.png)
+    ![Test list title, add item form, add button disabled](images/add-button-disabled.png)
+    ![Add button enabled](images/add-button-enabled.png)
 
 + My Lists dropdown menu
     + When more than one list is created, the user will navigate through then by clicking on the "My Lists" element. It will show all the names of the lists created so far with an arrow at the begining. By clicking in the list name, the page will display the items of that list.
 
-    ![My lists button](assets/readme-images/my-lists-dropdown.png)
+    ![My lists button](images/my-lists-dropdown.png)
 
 ### Features left to implement
 
@@ -83,9 +83,9 @@ The page is a helper for anyone who wants/needs to remember things they need to 
     + X button next to added items:
         + Erase item from HTML;
 
-![Page opened on Safari](assets/readme-images/safari-test.png)
-![Page opened on Firefox](assets/readme-images/firefox-test.png)
-![Page opened on Chrome](assets/readme-images/chrome-test.png)
+![Page opened on Safari](images/safari-test.png)
+![Page opened on Firefox](images/firefox-test.png)
+![Page opened on Chrome](images/chrome-test.png)
 
 ### Validation
 
@@ -93,16 +93,16 @@ The page is a helper for anyone who wants/needs to remember things they need to 
     + No errors were found when running the page on the [W3C HTML valitor](https://validator.w3.org/)
     + Two warnings were present in the validation and this regards the present of empty elements.
         +  The cause of this is because this elements will be filled later with user input;
-![Validation page on W3C HTML valitor](assets/readme-images/validation-html.png)
-![Warnings on validation page on W3C HTML valitor](assets/readme-images/validation-html-warnings.png)
+![Validation page on W3C HTML valitor](images/validation-html.png)
+![Warnings on validation page on W3C HTML valitor](images/validation-html-warnings.png)
 
 + CSS 
     + No errors were found when passing the code through on the oficial [W3C CSS validator](https://jigsaw.w3.org/css-validator/)
     + Three warnings were present.
         + The warnings refers to the CSS variable for the font family and it does not affect the use of the font;
 
-![Validation page on W3C CSS valitor](assets/readme-images/validation-css.png)
-![Warnings on validation page on W3C CSS valitor](assets/readme-images/validation-css-warnings.png)
+![Validation page on W3C CSS valitor](images/validation-css.png)
+![Warnings on validation page on W3C CSS valitor](images/validation-css-warnings.png)
 
 + JavaScript
     + No error was found when running all my JavaScript files on [JSHint](https://jshint.com/)
@@ -111,7 +111,7 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 
 + Using lighthouse in dev tools to confirm that the overall performance is efficient and accessible and colors and fonts chosen are readable.
 
-![Lighthouse report](assets/readme-images/lighthouse.png)
+![Lighthouse report](images/lighthouse.png)
 
 ### Bugs
     
