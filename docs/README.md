@@ -23,7 +23,7 @@ The page is a helper for anyone who wants/needs to remember things they need to 
     ![Page's footer with delete and new button](images/footer.png)
 
 + Popup for list creation
-    + When opening for the first time, the popup will automatically open. If not first time, the user must click on the new button for it to open. A tooltip appears not allowing the user to create a list with a name that already exists;
+    + When opening for the first time, the popup will automatically open. If not first time, the user must click on the new button for it to open. A tooltip appears not allowing the user to create a list with a name that already exists; When going to close the popup, a message appears informing the users that the button will close the popup displaying the last list created.
 
     ![Create new list popup](images/create-list-popup.png)
     ![List name already taken](images/list-name-taken-tooltip.png)
