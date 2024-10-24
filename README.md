@@ -156,22 +156,22 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 ### Validation
 
 + HTML
-    + No errors were found when running the page on the [W3C HTML valitor](https://validator.w3.org/)
-    + Two warnings were present in the validation and this regards the presence of empty elements.
-        +  The cause of this is because these elements will be filled later with user input;
+    + No errors were found when running the page on the [W3C HTML valitor](https://validator.w3.org/);
+    + Two warnings were present in the validation and this regards the presence of empty elements;
+        +  The cause of this is because these elements will be filled later with user input.
 ![Validation page on W3C HTML valitor](docs/images/validation-html.png)
 ![Warnings on validation page on W3C HTML valitor](docs/images/validation-html-warnings.png)
 
 + CSS 
-    + No errors were found when passing the code through on the official [W3C CSS validator](https://jigsaw.w3.org/css-validator/)
-    + Three warnings were present.
-        + The warnings refer to the CSS variable for the font family and it does not affect the use of the font;
+    + No errors were found when passing the code through on the official [W3C CSS validator](https://jigsaw.w3.org/css-validator/);
+    + Three warnings were present;
+        + The warnings refer to the CSS variable for the font family and it does not affect the use of the font.
 
 ![Validation page on W3C CSS valitor](docs/images/validation-css.png)
 ![Warnings on validation page on W3C CSS valitor](docs/images/validation-css-warnings.png)
 
 + JavaScript
-    + No error was found when running all my JavaScript files on [JSHint](https://jshint.com/)
+    + No error was found when running all my JavaScript files on [JSHint](https://jshint.com/).
 
 ### Lighthouse
 
@@ -186,7 +186,7 @@ The page is a helper for anyone who wants/needs to remember things they need to 
     + Fix: place variables in the right place, inside the event listener.
 
 + Bug: remove button not applying on all buttons, only on the first one;
-    + Fix: iterate through buttons every time the user adds a new item;
+    + Fix: iterate through buttons every time the user adds a new item.
 
 + Bug: in the dropdown menu with the created lists names, editing and saving the list was adding the event listener again to that element;
     + Fix: attach a custom property to the element to indicate that the event listener is already in place, thus not adding again.
@@ -204,7 +204,7 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 + The icon and favicon was taken from [Icon Archive](https://www.iconarchive.com/);
 + Information on how to use local storage on browser was taken from [thedevlife video](https://www.youtube.com/watch?v=xGvhj-f6IgQ&ab_channel=thedevlife) on YouTube;
 + Background picture taken from [Pexels](https://www.pexels.com/);
-+ Info button idea was taken from [Codepen](https://codepen.io/EasyBoarder/pen/LZzzjy)
++ Info button idea was taken from [Codepen](https://codepen.io/EasyBoarder/pen/LZzzjy);
 
 
 ### Tools
