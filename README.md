@@ -85,10 +85,12 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 + [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) is the language used to add interactivity to the page;
 + [JavaScript Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) is used for supporting multiple js files;
 + [Font Awesome](https://fontawesome.com/) is used for the delete item button;
++ [Licecap](https://www.cockos.com/licecap/) is used to create the gif for responsiveness;
 
 
 ## Deployment
 ### Deployment to Github Pages
+
 + The page was deployed in the early stages to GitHub pages. The steps to deploy are as follows:
     + In the GitHub [repository](https://github.com/mariaciceri/pin_head_list), navigate to the Settings tab;
     + On the right-hand side in the menu, click on pages;
@@ -96,9 +98,16 @@ The page is a helper for anyone who wants/needs to remember things they need to 
     + To access it for the first time, go back to Code in the main navbar and on the left-hand side scroll down to deployments, click there and open the page;
 
 ### Local deployment
+
 + In order to make a local copy of this project, you can clone it. In your IDE Terminal, type the following command to clone my repository:
 
 `git clone https://github.com/mariaciceri/pin_head_list`
+
+## Responsiveness
+
++ The page is responsive and works as well in small screens as in big ones;
+
+![Gif of the responsiveness of the page](/docs/images/clip.gif)
 
 ## Testing
 
