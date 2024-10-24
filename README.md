@@ -180,6 +180,7 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 ![Lighthouse report](docs/images/lighthouse.png)
 
 ### Bugs
+#### Fixed Bugs
     
 + Bug: when creating an item, it was not showing user input;
     + Fix: place variables in the right place, inside the event listener.
@@ -192,6 +193,10 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 
 + Bug: when new list created, all the event listeners that were added after a list was created, were added again, this way creating duplicates when adding items, saving lists and so on;
     + Fix: reload the page everytime a new list is created, ensuring that the event listeners are added only once.
+
+#### Unfixed Bugs
+
++ In the price field, the user can type letter "e" and this can be seen as a bug but it happens because of scientific notation that is a valid number format, so it was left like that. 
 
 ## Credits
 ### Content

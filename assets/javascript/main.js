@@ -244,7 +244,7 @@ function setupCreateListButton(myListManager) {
     createButtonDisabled.style.display = "block";
 
     /**
-     * Check if the input field for the list name is not empty;
+     * Check if the input field for the list name is not empty
      */
     listNameInput.addEventListener("input", checkCreateListInputs);
     
