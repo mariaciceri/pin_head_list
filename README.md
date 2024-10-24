@@ -105,7 +105,7 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 
 ## Responsiveness
 
-+ The page is responsive and works as well in small screens as in big ones;
++ The page is responsive and works as well in small screens as in big ones.
 
 ![Gif of the responsiveness of the page](/docs/images/clip.gif)
 
@@ -115,30 +115,43 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 
 ### Compatibility
 
-+ The page was tested on Chrome, Firefox and Safari. All browsers had the functionalities operating properly. The page was opened on two different computers with different operational systems, a tablet and a phone. The tests performed were manual:
-    + Create list button clicked:
-        + Closes create list popup window and display list title input, display creating item form and add button;
-    + Close button for creating list popup window:
-        + Closes the popup displaying again whatever is behind;
-    + New button:
-        + Opens create list popup window;
-    + Delete button:
-        + Opens confirmation popup window;
-    + Delete confirmation popup Yes button:
-        + Deletes the current list and display the last one created, if none, prompts the user to create a new one;
-        + Displays an alert saying that the list was deleted;
-    + Delete confirmation popup No button:
-        + Closes the popup window showing whatever is behind;
-    + My Lists button:
-        + Show dropdown menu with all list names created so far;
-    + Add button:
-        + Inserts the item in the HTML with the input information provided;
-    + X button next to added items:
-        + Erases item from HTML;
++ The page was tested on Chrome, Firefox and Safari. All browsers had the functionalities operating properly. The page was opened on two different computers with different operational systems, a tablet and a phone; 
++ On the phone, the page was tested on Safari and Chrome;
++ On the tablet, the page was tested on Chrome and Firefox.
 
 ![Page opened on Safari](docs/images/safari-test.png)
 ![Page opened on Firefox](docs/images/firefox-test.png)
 ![Page opened on Chrome](docs/images/chrome-test.png)
+
+### Manual Testing
+
++ Create list button clicked:
+    + Closes create list popup window and display list title input, display creating item form and add button;
++ Close button for creating list popup window:
+    + Closes the popup displaying again whatever is behind;
++ New button:
+    + Opens create list popup window;
++ Delete button:
+    + Opens confirmation popup window;
++ Delete confirmation popup Yes button:
+    + Deletes the current list and display the last one created, if none, prompts the user to create a new one;
+    + Displays an alert saying that the list was deleted;
++ Delete confirmation popup No button:
+    + Closes the popup window showing whatever is behind;
++ My Lists button:
+    + Show dropdown menu with all list names created so far;
++ Add button:
+    + Inserts the item in the HTML with the input information provided;
++ X button next to added items:
+    + Erases item from HTML;
++ Try to click on the add item button with no name on item name field:
+    + Did not insert;
++ Try to click on the add item button with a negative price:
+    + Did not insert and tooltip appeared;
++ Try to create a list with the a name that already exists:
+    + Did not create the list and tooltip appeared;
++ Try to close the popup window when no lists created:
+    + Did not close the popup and tooltip appeared;
 
 ### Validation
 
