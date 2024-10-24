@@ -212,11 +212,28 @@ function checkCreateListInputs() {
     }
 }
 
+function closeButtons(myListManager) {
+    const lists = myListManager.getMyLists();
+    const listsLength = Object.keys(lists).length;
+    const closeButton = document.getElementById("close-button");
+    const closeButtonDisabled = document.getElementById("close-button-disabled");
+
+    if (!listsLength) {
+        setupCloseCreateListButton(closeButtonDisabled);
+    }
+    else {
+        closeButton.style.display = "block";
+        closeButtonDisabled.style.display = "none";
+    }
+}
+
 /**
  * Set up the create (new list) button in the popup window;
  * @param {MyListManager} myListManager
  */
 function setupCreateListButton(myListManager) {
+
+    closeButtons(myListManager);
 
     const tooltip = document.getElementById("tooltip");
     const listNameInput = document.getElementById("list-name");
@@ -251,6 +268,21 @@ function setupCreateListButton(myListManager) {
             //reload the page to refresh event listeners
             location.reload();
             }
+    });
+}
+
+/**
+ * Set up event listener for the close create list button when disabled;
+ */
+function setupCloseCreateListButton(closeCreateListButton) { 
+
+    const closeCreateListTooltip = document.getElementById("info-on-close");
+
+    closeCreateListButton.addEventListener("click", () => {
+        closeCreateListTooltip.parentElement.classList.add("show");
+        setTimeout(() => {
+            closeCreateListTooltip.parentElement.classList.remove("show");
+        }, 3000);
     });
 }
 

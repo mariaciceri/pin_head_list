@@ -151,6 +151,7 @@ footer button {
 }
 
 .close-button {
+    display: none;
     background-color: var(--primary-color);
     color: var(--tertiary-color);
     border-style: none;
@@ -160,6 +161,16 @@ footer button {
     box-shadow: 2px 2px 5px var(--quinary-color);
     margin-left: auto;
     cursor: var(--primary-cursor);
+}
+
+.close-button-disabled {
+    display: block;
+    background-color: gray;
+    border-style: none;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    margin-left: auto;
 }
 
 .info-on-close {
@@ -172,6 +183,13 @@ footer button {
     border-radius: var(--border-radius);
     padding: 3px;
     width: max-content;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.header.show .info-on-close {
+    display: block;
+    opacity: 1;
 }
 
 .create-list-button {
@@ -440,10 +458,6 @@ footer button {
         transform: translate(0, 2px);
         background-color: var(--tertiary-color);
         color: var(--quinary-color);
-    }
-
-    .close-button:hover+.info-on-close {
-        display: block;
     }
 
     /*delete item button */
