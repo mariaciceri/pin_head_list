@@ -30,23 +30,29 @@ The page is a helper for anyone who wants/needs to remember things they need to 
     ![Page's header](docs/images/header.png)
 
 + Footer
-    + In the footer there are three buttons with tag "Delete" and "New" indicating that a list can be deleted, a new one can be created and the edited list must be saved;
+    + In the footer there are three buttons with tag "Delete" and "New" indicating that a list can be deleted and a new one can be created.
 
     ![Page's footer with delete and new button](docs/images/footer.png)
 
 + Popup for list creation
-    + When opening for the first time, the popup will automatically open. If not the first time, the user must click on the new button for it to open. A tooltip appears not allowing the user to create a list with a name that already exists; When going to close the popup, a message appears informing the users that the button will close the popup displaying the last list created.
+    + When opening for the first time, the popup will automatically open. If not the first time, the user must click on the new button for it to open. A tooltip appears not allowing the user to create a list with a name that already exists; 
+    + The closing popup button is only available when there is a list to be displayed, otherwise the user must create one before entering the page;
+    + After creating a new list, the list name will be displayed on the top, below the header, with the category on the top-right side of it.
+    + The form for creating a new item will show below the list name and there will be an add button that will appear disabled at first;
 
     ![Create new list popup](docs/images/create-list-popup.png)
     ![List name already taken](docs/images/list-name-taken-tooltip.png)
 
 + Popup for deleting list
     + When the user clicks on the delete button, a popup window will prompt the user to confirm the deletion;
+    + If pressed yes, an alert message will give the user feedback confirming the current list was deleted;
+    + If no is pressed, the popup is closed.
 
     ![Delete list confirmation popup window](docs/images/delete-list-popup.png)
 
 + Add item layout
-    + After creating a new list, the list name will be displayed on the top with the category on the top-right side of it, and the form for creating a new item will show together with an add button that will appear disabled at first. When something else than space is in the input field for name, the "add" button becomes enabled and, if clicked, inserts the newly created item above the input form with an "x" at the end, indicating that the item can be removed, and then the add button becomes disabled again.
+    + When something else than space is in the input field for name, the "add" button becomes enabled and, if clicked, inserts the newly created item above the input form with an "x" at the end, indicating that the item can be removed, and then the add button becomes disabled again;
+    + There is validation for the price: if the user manually insert a negative number, a tooltip saying that the price must be a positive number will appear for 3 seconds and the add button is disabled again.
 
     ![Test list title, add item form, add button disabled](docs/images/add-button-disabled.png)
     ![Add button enabled](docs/images/add-button-enabled.png)
