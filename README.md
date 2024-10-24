@@ -71,6 +71,34 @@ The page is a helper for anyone who wants/needs to remember things they need to 
     + Sum of all the prices when provided;
     + List types: to-do lists and shopping lists;
 
+## Technologies
+
++ [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) is the foundation of the page;
++ [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) adds the style and layout of the page;
++ [CSS Flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox) adds responsiveness to elements of the page;
++ [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/grid) styles the display of items on the page;
++ [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) is used for the maintainability of repeated styles;
++ [Gitpod](https://gitpod.io/) with [VSCode](https://code.visualstudio.com/) desktop extension is the IDE for the project;
++ [Git](https://git-scm.com/) is used for version control;
++ [Github](https://github.com/) is used for hosting the page;
++ [Github Pages](https://pages.github.com/) is where the page was deployed;
++ [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) is the language used to add interactivity to the page;
++ [JavaScript Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) is used for supporting multiple js files;
++ [Font Awesome](https://fontawesome.com/) is used for the delete item button;
+
+
+## Deployment
+### Deployment to Github Pages
++ The page was deployed in the early stages to GitHub pages. The steps to deploy are as follows:
+    + In the GitHub [repository](https://github.com/mariaciceri/pin_head_list), navigate to the Settings tab;
+    + On the right-hand side in the menu, click on pages;
+    + In Source check if "deploy from branch" is selected, then below it, in Branch, select "main" and save it;
+    + To access it for the first time, go back to Code in the main navbar and on the left-hand side scroll down to deployments, click there and open the page;
+
+### Local deployment
++ In order to make a local copy of this project, you can clone it. In your IDE Terminal, type the following command to clone my repository:
+
+`git clone https://github.com/mariaciceri/pin_head_list`
 
 ## Testing
 
@@ -143,27 +171,11 @@ The page is a helper for anyone who wants/needs to remember things they need to 
 + Bug: when new list created, all the event listeners that were added after a list was created, were added again, this way creating duplicates when adding items, saving lists and so on;
     + Fix: reload the page everytime a new list is created, ensuring that the event listeners are added only once.
 
-
-## Deployment
-### Deployment to Github Pages
-+ The page was deployed in the early stages to GitHub pages. The steps to deploy are as follows:
-    + In the GitHub [repository](https://github.com/mariaciceri/pin_head_list), navigate to the Settings tab;
-    + On the right-hand side in the menu, click on pages;
-    + In Source check if "deploy from branch" is selected, then below it, in Branch, select "main" and save it;
-    + To access it for the first time, go back to Code in the main navbar and on the left-hand side scroll down to deployments, click there and open the page;
-
-### Local deployment
-+ In order to make a local copy of this project, you can clone it. In your IDE Terminal, type the following command to clone my repository:
-
-`git clone https://github.com/mariaciceri/pin_head_list`
-
-
 ## Credits
 ### Content
 
 + The icon and favicon was taken from [Icon Archive](https://www.iconarchive.com/);
 + Information on how to use local storage on browser was taken from [thedevlife video](https://www.youtube.com/watch?v=xGvhj-f6IgQ&ab_channel=thedevlife) on YouTube;
-+ Delete item icon was taken from [Font Awesome](https://fontawesome.com/);
 + Background picture taken from [Pexels](https://www.pexels.com/);
 + Info button idea was taken from [Codepen](https://codepen.io/EasyBoarder/pen/LZzzjy)
 
